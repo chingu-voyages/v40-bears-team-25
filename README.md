@@ -70,10 +70,7 @@ The list of dependencies used for code quality and test are :
     - navigate to the location you want to create the project in (eg - home or c:/)
     - enter the command `git clone <url-of-this-project>`. Alternatively, you can provide the name of the folder you want git to clone the project to with `git clone <url-of-this-project> <name-of-folder>`
     - `cd` into the project folder
-    - `cd` into the frontend folder
     - Run `npm install` to install the packages for the frontend
-    - `cd` into the backend folder
-    - Run `npm install` to install the packages for the backend
-    - Remain in the backend folder and run `npm run serve`.
+    - Run `npm run dev` to start the development server
 
 <br>
