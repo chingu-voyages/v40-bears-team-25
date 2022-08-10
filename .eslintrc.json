@@ -1,12 +1,14 @@
 {
-  "plugins": ["@typescript-eslint"],
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:jest-dom/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier"
-  ],
-  "rules": {
-    "@typescript-eslint/no-unused-vars": "error"
-  }
+	"plugins": ["@typescript-eslint"],
+	"extends": [
+		"next/core-web-vitals",
+		"plugin:jest-dom/recommended",
+		"plugin:@typescript-eslint/recommended",
+		"plugin:react/recommended",
+		"airbnb",
+		"prettier"
+	],
+	"rules": {
+		"@typescript-eslint/no-unused-vars": "error"
+	}
 }
