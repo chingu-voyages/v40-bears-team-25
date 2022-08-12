@@ -40,7 +40,7 @@ export const theme: CoachMeTheme = {
 		offlineRed: '#f02020',
 		green: '#6dd22e',
 	},
-	fonts: ['sans-serif'],
+	fonts: ['Poppins', 'Heebo', 'sans-serif'],
 	fontSize: {
 		small: '1em',
 		medium: '2em',

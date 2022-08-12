@@ -21,7 +21,12 @@ const GlobalStyles = createGlobalStyle`
 
 body {
   min-height: 100vh;
+  font-family: 'Poppins';
 }
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Heebo", sans-serif;
+};
 
 main {
   //to give margin to NavBar
