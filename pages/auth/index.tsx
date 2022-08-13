@@ -8,7 +8,10 @@ import {
 	Typography,
 } from '@mui/material'
 import React, { useState } from 'react'
-import Input from '../components/Input/Input'
+import { Formik, Form } from 'formik'
+import * as yup from 'yup'
+import Input from '@/components/Input'
+import validationSchema from '@/utils/helper'
 
 const Auth = () => {
 	const [isSignedUp, setIsSignedUp] = useState(false)
@@ -54,7 +57,7 @@ const Auth = () => {
 
 	return (
 		<Container style={{ marginTop: '5em' }}>
-			<Paper elevation={6}>
+			<Paper elevation={6} sx={{ padding: 6 }}>
 				<Grid container justifyContent="flex-end">
 					<Grid item>
 						<Button onClick={switchMode}>
