@@ -1,7 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 import styled from 'styled-components'
+// import Box from '@mui/material/Box'
 
-export const FooterDiv = styled.footer`
+export const FooterDiv = styled.div`
 	position: sticky;
 	top: 100%;
 	display: flex;

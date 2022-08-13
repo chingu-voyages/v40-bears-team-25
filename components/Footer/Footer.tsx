@@ -1,12 +1,15 @@
 import React from 'react'
-import {FooterDiv} from './Footer.styled';
+import Box from '@mui/material/Box'
+import { useTheme } from '@mui/material/styles'
 
 const Footer = () => {
-  return (
-    <FooterDiv>
-      Footer
-    </FooterDiv>
-  )
+	const theme = useTheme()
+
+	return (
+		<Box sx={{ padding: 2, backgroundColor: theme.custom.liteBlue }}>
+			Footer
+		</Box>
+	)
 }
 
-export default Footer;
+export default Footer
