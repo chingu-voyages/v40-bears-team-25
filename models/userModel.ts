@@ -1,4 +1,11 @@
-import { Schema, model, models } from 'mongoose'
+import { Schema, model, models, Document, Model } from 'mongoose'
+
+interface IUser extends Document {
+	email: string
+	passwordHash: string
+	firstName: string
+	lastName: string
+}
 
 const userSchema = new Schema({
 	email: {
@@ -21,7 +28,7 @@ const userSchema = new Schema({
 	// Profile -> bio, profileType, rating, personalTrainer, sharedfiles
 })
 
-const Test = models.User || model('User', userSchema)
+const Test = (models.User as Model<IUser>) || model<IUser>('User', userSchema)
 
 // (source: https://blog.usman-s.me/how-to-use-mongoose-with-nextjs-for-mongodb)
 // IMPORTANT: Notice how we use models.Test and then the logical OR operator
