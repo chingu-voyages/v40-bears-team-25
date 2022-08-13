@@ -2,17 +2,18 @@
 import mongoose from 'mongoose'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 
-const connectMongo = async () => {
-	console.log('Connecting to Mongo...')
-	let MONGO_URI: string | undefined
-
+const getMongoUri = async () => {
 	if (process.env.NODE_ENV === 'test') {
 		const mongoMemoryServer = await MongoMemoryServer.create()
 
-		MONGO_URI = mongoMemoryServer.getUri()
-	} else {
-		MONGO_URI = process.env.MONGO_URI
+		return mongoMemoryServer.getUri()
 	}
+	return process.env.MONGO_URI
+}
+
+const connectMongo = async () => {
+	console.log('Connecting to Mongo...')
+	const MONGO_URI = await getMongoUri()
 
 	if (!MONGO_URI) {
 		console.error(
