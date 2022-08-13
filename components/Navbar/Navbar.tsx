@@ -1,13 +1,6 @@
-import Link from 'next/link';
-import { NavbarContainer } from './Navbar.styled';
+import React from 'react'
+import { NavbarContainer } from './Navbar.styled'
 
-const Navbar = () => {
+const Navbar = () => <NavbarContainer>NAV</NavbarContainer>
 
-  return (
-    <NavbarContainer>
-     NAV
-    </NavbarContainer>
-  )
-}
-
-export default Navbar;
+export default Navbar
