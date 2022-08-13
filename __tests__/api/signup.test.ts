@@ -11,7 +11,7 @@ interface Mocks {
 const mockUser = {
 	firstName: 'Mike',
 	lastName: 'Ross',
-	email: 'mike.ross@harveyspecter.com',
+	email: 'mike.ross@pearsonspecter.com',
 	password: 'passwordTest',
 }
 
