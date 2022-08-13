@@ -5,7 +5,7 @@ export interface CoachMeTheme {
 		litePink: '#ffb5c6'
 		liteYellow: '#fff0cc'
 		liteOrange: '#fff0e4'
-		liteBlue: '#ff6902'
+		liteBlue: '#e5f7ff'
 		purple: '#fd1b4f'
 		pink: '#fd1b4f'
 		yellow: '#face65'
@@ -30,7 +30,7 @@ export const theme: CoachMeTheme = {
 		litePink: '#ffb5c6',
 		liteYellow: '#fff0cc',
 		liteOrange: '#fff0e4',
-		liteBlue: '#ff6902',
+		liteBlue: '#e5f7ff',
 		purple: '#fd1b4f',
 		pink: '#fd1b4f',
 		yellow: '#face65',

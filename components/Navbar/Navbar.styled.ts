@@ -1,3 +1,4 @@
+/* eslint-disable import/prefer-default-export */
 import styled from 'styled-components'
 
 export const NavbarContainer = styled.nav`
@@ -8,5 +9,5 @@ export const NavbarContainer = styled.nav`
 	height: 5em;
 	width: 100%;
 	margin: auto;
-	background-color: ${({ theme }) => theme.color.dBlue};
+	background-color: ${({ theme }) => theme.color.blue};
 `
