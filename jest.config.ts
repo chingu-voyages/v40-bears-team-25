@@ -10,7 +10,7 @@ const customJestConfig = {
 	// Add more setup options before each test is run
 	setupFilesAfterEnv: ['@testing-library/jest-dom'], // if using TypeScript with a baseUrl set to the root directory then you need the below for alias' to work
 	moduleDirectories: ['node_modules', '<rootDir>/'],
-	testEnvironment: 'jest-environment-jsdom',
+	testEnvironment: 'node', // NOTE: this has to be 'node' instead of jsdom for mongoose to work.
 }
 
 module.exports = createJestConfig(customJestConfig)
