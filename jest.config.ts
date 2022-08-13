@@ -1,4 +1,5 @@
 import nextJest from 'next/jest'
+
 // Sync object
 const createJestConfig = nextJest({
 	// Provide the path to your Next.js app to load next.config.js and .env files in your test environment
@@ -13,4 +14,4 @@ const customJestConfig = {
 	testEnvironment: 'node', // NOTE: this has to be 'node' instead of jsdom for mongoose to work.
 }
 
-module.exports = createJestConfig(customJestConfig)
+export default customJestConfig
