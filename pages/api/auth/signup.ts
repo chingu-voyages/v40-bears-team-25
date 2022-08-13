@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import connectMongo from '../../../lib/connectMongo'
+import hashPassword from '../../../lib/hashPassword'
+import User from '../../../models/userModel'
 
 export default async function handleSignup(
 	req: NextApiRequest,
@@ -19,10 +21,26 @@ export default async function handleSignup(
 
 	const { firstName, lastName, email, password } = req.body
 
+	// Validation
+
+	// hash the password
+	const passwordHash = await hashPassword(password)
+
+	// create user from model
+	const user = new User({
+		firstName,
+		lastName,
+		email,
+		passwordHash,
+	})
+
+	// await save user
+	await user.save()
+
+	// return created user without password hash
 	return res.status(200).json({
 		firstName,
 		lastName,
 		email,
-		password,
 	})
 }
