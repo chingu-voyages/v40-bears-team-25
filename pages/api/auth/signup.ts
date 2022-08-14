@@ -21,8 +21,6 @@ export default async function handleSignup(
 
 	const { firstName, lastName, email, password } = req.body
 
-	// Validation
-
 	// hash the password
 	const passwordHash = await hashPassword(password)
 
@@ -34,8 +32,11 @@ export default async function handleSignup(
 		passwordHash,
 	})
 
-	// await save user
-	await user.save()
+	// await save user, validation happens here
+	try {
+		await user.save()
+	} catch (error) {
+	}
 
 	// return created user without password hash
 	return res.status(200).json({
