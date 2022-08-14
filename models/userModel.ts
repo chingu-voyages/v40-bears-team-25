@@ -12,6 +12,7 @@ const userSchema = new Schema({
 		type: String,
 		required: true,
 		unique: true,
+		match: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
 	},
 	passwordHash: {
 		type: String,
@@ -20,10 +21,14 @@ const userSchema = new Schema({
 	firstName: {
 		type: String,
 		required: true,
+		minLength: 3,
+		maxLength: 15,
 	},
 	lastName: {
 		type: String,
 		required: true,
+		minLength: 3,
+		maxLength: 15,
 	},
 	// Profile -> bio, profileType, rating, personalTrainer, sharedfiles
 })
