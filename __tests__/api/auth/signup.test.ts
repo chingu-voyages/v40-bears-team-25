@@ -9,7 +9,14 @@ interface Mocks {
 	res: MockResponse<NextApiResponse>
 }
 
-const mockUser = {
+interface User {
+	firstName?: string
+	lastName: string
+	email: string
+	password?: string
+}
+
+const mockUser: User = {
 	firstName: 'Mike',
 	lastName: 'Ross',
 	email: 'mike.ross@pearsonspecter.com',
@@ -46,6 +53,43 @@ describe('/auth/signup', () => {
 		expect(res._getData()).toBe(
 			'You can only send POST requests to this endpoint'
 		)
+	})
+
+	describe('invalid fields...', () => {
+		test('Invalid password returns 400', async () => {
+			const invalidUser = { ...mockUser }
+			delete invalidUser.password
+
+			const { req, res }: Mocks = createMocks({
+				method: 'POST',
+				body: invalidUser,
+			})
+
+			await handleSignup(req, res)
+
+			const errorData = res._getData()
+
+			expect(res.statusCode).toBe(400)
+			expect(Object.keys(errorData)).toEqual(['password'])
+		})
+
+		test('Other invalid fields get checked when saving', async () => {
+			const invalidUser = { ...mockUser }
+			delete invalidUser.firstName
+
+			console.log(mockUser)
+			const { req, res }: Mocks = createMocks({
+				method: 'POST',
+				body: invalidUser,
+			})
+
+			await handleSignup(req, res)
+
+			const errorData = res._getData()
+
+			expect(res.statusCode).toBe(400)
+			expect(Object.keys(errorData)).toEqual(['firstName'])
+		})
 	})
 
 	afterAll(async () => {
