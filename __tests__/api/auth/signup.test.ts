@@ -1,7 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createMocks, MockResponse, MockRequest } from 'node-mocks-http'
-import handleSignup from '../../pages/api/auth/signup'
+import handleSignup from '../../../pages/api/auth/signup'
 
 interface Mocks {
 	req: MockRequest<NextApiRequest>
