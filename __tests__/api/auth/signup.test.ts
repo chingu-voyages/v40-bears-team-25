@@ -35,10 +35,12 @@ describe('/auth/signup', () => {
 		const body = res._getJSONData()
 
 		expect(res.statusCode).toBe(200)
-		// To be changed, when we will implement a token and return the token in the response
-		expect(Object.keys(body)).toEqual(
-			Object.keys(mockUser).filter((key) => key !== 'password')
-		)
+		// checks that Returned user has an id property of type string
+		expect(typeof body.id).toBe('string')
+		// checks that API does not return a password
+		expect(body.password).toBeUndefined()
+		// checks that returned email corresponds to the user email
+		expect(body.email).toEqual(mockUser.email)
 	})
 
 	test('returns Code 400 if method is not POST', async () => {
