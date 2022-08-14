@@ -7,11 +7,14 @@ export default async function handleSignup(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
+	// If it is not a POST request, a Bad Response is returned
 	if (req.method !== 'POST') {
 		return res
 			.status(400)
 			.send('You can only send POST requests to this endpoint')
 	}
+
+	// Connect to MongoDB
 	const connectionError = await database.connectMongo()
 
 	if (connectionError) {
@@ -19,6 +22,7 @@ export default async function handleSignup(
 		return res.status(500).send(connectionError)
 	}
 
+	// pull the input from request body
 	const { firstName, lastName, email, password } = req.body
 
 	// Checks for password, otherwise bcrypt will throw error. Other paths are validated when saving
@@ -37,7 +41,7 @@ export default async function handleSignup(
 		passwordHash,
 	})
 
-	// await save user, validation happens here
+	// save the user into the database (validation happens here)
 	try {
 		await user.save()
 	} catch (error) {

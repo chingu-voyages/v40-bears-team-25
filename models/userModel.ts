@@ -1,5 +1,6 @@
 import { Schema, model, models, Document, Model } from 'mongoose'
 
+// Extends document is used to make methods like .save() available when creating a new User
 interface IUser extends Document {
 	email: string
 	passwordHash: string
@@ -35,6 +36,10 @@ const userSchema = new Schema({
 
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
+/**
+ * Edits the document returned from the Database by removing the passwordHash, _id, __v
+ * and creating a id property
+ */
 userSchema.set('toJSON', {
 	transform: (document, returnedObject) => {
 		returnedObject.id = returnedObject._id.toString()
