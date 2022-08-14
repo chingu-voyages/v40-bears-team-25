@@ -8,12 +8,14 @@ import { MongoMemoryServer } from 'mongodb-memory-server'
  * - If node is running in `production` or `development`, the function uses the Environment Variable
  */
 const getMongoUri = async () => {
+	// If it is a testing environment, a mock database is created using MongoMemoryserver
 	if (process.env.NODE_ENV === 'test') {
 		const mongoMemoryServer = await MongoMemoryServer.create()
 
 		return mongoMemoryServer.getUri()
 	}
 
+	// Otherwise, process.env is checked for MONGO_URI environment variable and that is used
 	if (!process.env.MONGO_URI) {
 		throw new Error(
 			'Unable to find your MongoDB URI - Have you created a .env file with an ENV VAR named "MONGO_URI"?'
@@ -23,8 +25,9 @@ const getMongoUri = async () => {
 	return process.env.MONGO_URI
 }
 
+// The cached connection is pulled from the global variable
 let cached = global.mongoose
-
+// If there is none, one is initialized
 if (!cached) {
 	global.mongoose = { conn: null, promise: null }
 	cached = global.mongoose
@@ -41,6 +44,7 @@ const connectMongo = async () => {
 	const MONGO_URI = await getMongoUri()
 
 	try {
+		// If there is no connection, a promise is created
 		if (!cached.promise) {
 			const opts = {
 				bufferCommands: false,
@@ -51,6 +55,7 @@ const connectMongo = async () => {
 			cached.promise = mongoose.connect(MONGO_URI, opts)
 		}
 
+		// The connection is set to be the resolved promise
 		cached.conn = await cached.promise
 
 		console.log('...Connected!')
