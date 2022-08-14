@@ -1,6 +1,7 @@
 /* eslint-disable no-underscore-dangle */
 import { NextApiRequest, NextApiResponse } from 'next'
 import { createMocks, MockResponse, MockRequest } from 'node-mocks-http'
+import { database } from '../../../lib'
 import handleSignup from '../../../pages/api/auth/signup'
 
 interface Mocks {
@@ -28,7 +29,9 @@ describe('/auth/signup', () => {
 
 		expect(res.statusCode).toBe(200)
 		// To be changed, when we will implement a token and return the token in the response
-		expect(body).toEqual(mockUser)
+		expect(Object.keys(body)).toEqual(
+			Object.keys(mockUser).filter((key) => key !== 'password')
+		)
 	})
 
 	test('returns Code 400 if method is not POST', async () => {
@@ -43,5 +46,9 @@ describe('/auth/signup', () => {
 		expect(res._getData()).toBe(
 			'You can only send POST requests to this endpoint'
 		)
+	})
+
+	afterAll(async () => {
+		await database.disconnectMongo()
 	})
 })
