@@ -40,23 +40,27 @@ const connectMongo = async () => {
 	console.log('Connecting to Mongo...')
 	const MONGO_URI = await getMongoUri()
 
-	if (!cached.promise) {
-		const opts = {
-			bufferCommands: false,
+	try {
+		if (!cached.promise) {
+			const opts = {
+				bufferCommands: false,
+			}
+
+			console.log('Connection not existing yet. About to initialize connection')
+
+			cached.promise = mongoose.connect(MONGO_URI, opts)
 		}
 
-		cached.promise = mongoose.connect(MONGO_URI, opts)
-	}
-
-	try {
 		cached.conn = await cached.promise
+
+		console.log('...Connected!')
+		return 0 // cached.conn
 	} catch (error) {
+		console.error('... An Error Occured!')
 		console.error(error)
+
 		return error
 	}
-
-	console.log('...Connected!')
-	return 0 // cached.conn
 }
 
 /**
