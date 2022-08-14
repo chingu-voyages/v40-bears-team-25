@@ -1,4 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { handleError } from '../../../lib'
 import connectMongo from '../../../lib/connectMongo'
 import hashPassword from '../../../lib/hashPassword'
 import User from '../../../models/userModel'
@@ -36,6 +37,8 @@ export default async function handleSignup(
 	try {
 		await user.save()
 	} catch (error) {
+		const errors = handleError(error)
+		return res.status(400).send(errors)
 	}
 
 	// return created user without password hash
