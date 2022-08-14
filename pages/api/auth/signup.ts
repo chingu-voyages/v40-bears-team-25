@@ -1,6 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { handleError } from '../../../lib'
-import connectMongo from '../../../lib/connectMongo'
+import { handleError, database } from '../../../lib'
 import hashPassword from '../../../lib/hashPassword'
 import User from '../../../models/userModel'
 
@@ -13,7 +12,7 @@ export default async function handleSignup(
 			.status(400)
 			.send('You can only send POST requests to this endpoint')
 	}
-	const connectionError = await connectMongo()
+	const connectionError = await database.connectMongo()
 
 	if (connectionError) {
 		console.error(connectionError)

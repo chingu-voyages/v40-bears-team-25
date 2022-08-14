@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import mongoose from 'mongoose'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 
@@ -46,4 +45,13 @@ const connectMongo = async () => {
 	}
 }
 
-export default connectMongo
+/**
+ * Async function that disconnects from MongoDB and returns a message when done
+ */
+const disconnectMongo = async () => {
+	console.log('Disconnecting from MongoDB...')
+	await mongoose.disconnect()
+	console.log('...Disconnected!')
+}
+
+export default { connectMongo, disconnectMongo }

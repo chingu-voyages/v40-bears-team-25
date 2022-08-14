@@ -1,6 +1,6 @@
 // note: if you try to import mongoose object, Error will be undefined and you won't be able to access ValidationError
 import { Error } from 'mongoose'
-import { connectMongo, disconnectMongo } from '../../lib'
+import { database } from '../../lib'
 import User from '../../models/userModel'
 
 const mockUser = {
@@ -25,7 +25,7 @@ const testUser = async (userData: UserData) => {
 
 describe('User Model', () => {
 	beforeAll(async () => {
-		await connectMongo()
+		await database.connectMongo()
 	})
 
 	test('should not return an error if all fields are valid', async () => {
@@ -76,6 +76,6 @@ describe('User Model', () => {
 	})
 
 	afterAll(() => {
-		disconnectMongo()
+		database.disconnectMongo()
 	})
 })
