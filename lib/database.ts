@@ -15,8 +15,16 @@ const getMongoUri = async () => {
 	return process.env.MONGO_URI
 }
 
+let cached = global.mongoose
+
+if (!cached) {
+	global.mongoose = { conn: null, promise: null }
+	cached = global.mongoose
+}
+
 /**
  * Connects to MongoDB through Mongoose
+ * - If connection has been already established, it doesn't create a new connection
  * - If the connection is successful, it returns 0
  * - If there is any error, it returns the error
  */
@@ -24,25 +32,23 @@ const connectMongo = async () => {
 	console.log('Connecting to Mongo...')
 	const MONGO_URI = await getMongoUri()
 
-	if (!MONGO_URI) {
-		console.error(
-			'Unable to find your MongoDB URI - Have you created a .env file with an ENV VAR named "MONGO_URI"?'
-		)
-		console.error('...Could not connect to MongoDB!')
+	if (!cached.promise) {
+		const opts = {
+			bufferCommands: false,
+		}
 
-		return false
+		cached.promise = mongoose.connect(MONGO_URI, opts)
 	}
 
 	try {
-		await mongoose.connect(MONGO_URI)
-		console.log('...Connected to MongoDB!')
-
-		return 0
+		cached.conn = await cached.promise
 	} catch (error) {
-		console.log(error, typeof error)
-
+		console.error(error)
 		return error
 	}
+
+	console.log('...Connected!')
+	return 0 // cached.conn
 }
 
 /**
