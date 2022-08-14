@@ -23,7 +23,7 @@ export default async function handleSignup(
 
 	// Checks for password, otherwise bcrypt will throw error. Other paths are validated when saving
 	if (!password) {
-		res.status(400).send({ password: 'password is required' })
+		return res.status(400).send({ password: 'password is required' })
 	}
 
 	// hash the password
