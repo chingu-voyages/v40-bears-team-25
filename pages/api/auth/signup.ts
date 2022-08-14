@@ -42,17 +42,14 @@ export default async function handleSignup(
 	})
 
 	// save the user into the database (validation happens here)
+	let newUser
 	try {
-		await user.save()
+		newUser = await user.save()
 	} catch (error) {
 		const errors = handleError(error)
 		return res.status(400).send(errors)
 	}
 
-	// return created user without password hash
-	return res.status(200).json({
-		firstName,
-		lastName,
-		email,
-	})
+	// return created user without password hash.
+	return res.status(200).json(newUser)
 }
