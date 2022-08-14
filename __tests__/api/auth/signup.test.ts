@@ -77,7 +77,6 @@ describe('/auth/signup', () => {
 			const invalidUser = { ...mockUser }
 			delete invalidUser.firstName
 
-			console.log(mockUser)
 			const { req, res }: Mocks = createMocks({
 				method: 'POST',
 				body: invalidUser,
