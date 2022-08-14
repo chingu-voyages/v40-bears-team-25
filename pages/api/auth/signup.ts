@@ -7,16 +7,16 @@ export default async function handleSignup(
 	req: NextApiRequest,
 	res: NextApiResponse
 ) {
-	const error = await connectMongo()
 	if (req.method !== 'POST') {
 		return res
 			.status(400)
 			.send('You can only send POST requests to this endpoint')
 	}
+	const connectionError = await connectMongo()
 
-	if (error) {
-		console.error(error)
-		return res.json(error)
+	if (connectionError) {
+		console.error(connectionError)
+		return res.status(500).send(connectionError)
 	}
 
 	const { firstName, lastName, email, password } = req.body
