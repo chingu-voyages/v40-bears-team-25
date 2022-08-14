@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import mongoose from 'mongoose'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 
@@ -12,6 +13,13 @@ const getMongoUri = async () => {
 
 		return mongoMemoryServer.getUri()
 	}
+
+	if (!process.env.MONGO_URI) {
+		throw new Error(
+			'Unable to find your MongoDB URI - Have you created a .env file with an ENV VAR named "MONGO_URI"?'
+		)
+	}
+
 	return process.env.MONGO_URI
 }
 
