@@ -1,24 +1,23 @@
 import React from 'react'
-import { Grid, TextField, MenuItem, Avatar } from '@mui/material'
+import { Grid, TextField, MenuItem } from '@mui/material'
 import {
 	PageContainer,
 	SelectTextField,
 	FormButton,
-	AvatarEditContainer,
 	AvaEditBtn,
 } from './edit.styled'
 import Input from '../../components/Input'
 import SelectDropdown from '../../components/SelectDropDown'
 import PageTitleDiv from '../../components/PageTitleDiv'
 import { wtUnits, htUnits, usrStatus } from '../../utils/constants'
+import AvatarContainer from '../../components/AvatarContainer'
 
 const Edit = () => (
 	<PageContainer maxWidth="md">
 		<PageTitleDiv title="Edit Profile" />
-		<AvatarEditContainer>
-			<Avatar sx={{ width: 80, height: 80 }}>V</Avatar>
+		<AvatarContainer avatarContent="V">
 			<AvaEditBtn variant="contained">change photo</AvaEditBtn>
-		</AvatarEditContainer>
+		</AvatarContainer>
 		<form>
 			<Input name="first_name" label="first name" />
 			<Input name="surname" label="surname" />
