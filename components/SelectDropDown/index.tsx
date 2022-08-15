@@ -11,7 +11,7 @@ interface SelectDropdownProps {
 const SelectDropdown = ({ children, label, sx }: SelectDropdownProps) => (
 	<SelectGroup sx={sx}>
 		<InputLabel>{label}</InputLabel>
-		<CustomSelect label="height unit">{children}</CustomSelect>
+		<CustomSelect>{children}</CustomSelect>
 	</SelectGroup>
 )
 
