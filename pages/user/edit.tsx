@@ -26,17 +26,21 @@ const Edit = () => (
 			<Grid columnSpacing={1} container>
 				<Grid item xs={12} md={6} sx={{ display: 'flex' }}>
 					<SelectTextField name="weight" label="enter weight" />
-					<SelectDropdown label="weight unit">
+					<SelectDropdown label="weight unit" value="kg">
 						{wtUnits.map((unit) => (
-							<MenuItem value={unit}>{unit}</MenuItem>
+							<MenuItem value={unit} key={`editWtUnit_${unit}`}>
+								{unit}
+							</MenuItem>
 						))}
 					</SelectDropdown>
 				</Grid>
 				<Grid item xs={12} md={6} sx={{ display: 'flex' }}>
 					<SelectTextField name="height" label="enter height" />
-					<SelectDropdown label="height unit">
+					<SelectDropdown label="height unit" value="cm">
 						{htUnits.map((unit) => (
-							<MenuItem value={unit}>{unit}</MenuItem>
+							<MenuItem value={unit} key={`editHtUnit_${unit}`}>
+								{unit}
+							</MenuItem>
 						))}
 					</SelectDropdown>
 				</Grid>
@@ -51,9 +55,15 @@ const Edit = () => (
 				rows={4}
 				fullWidth
 			/>
-			<SelectDropdown label="looking for" sx={{ width: '100%' }}>
+			<SelectDropdown
+				label="looking for"
+				sx={{ width: '100%' }}
+				value="inactive"
+			>
 				{usrStatus.map((status) => (
-					<MenuItem value={status}>{status}</MenuItem>
+					<MenuItem key={`editUsrStat_${status}`} value={status}>
+						{status}
+					</MenuItem>
 				))}
 			</SelectDropdown>
 			<FormButton variant="contained">Save</FormButton>
