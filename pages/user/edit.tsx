@@ -10,6 +10,7 @@ import {
 import Input from '../../components/Input'
 import SelectDropdown from '../../components/SelectDropDown'
 import PageTitleDiv from '../../components/PageTitleDiv'
+import { wtUnits, htUnits, usrStatus } from '../../utils/constants'
 
 const Edit = () => (
 	<PageContainer maxWidth="md">
@@ -27,23 +28,17 @@ const Edit = () => (
 				<Grid item xs={12} md={6} sx={{ display: 'flex' }}>
 					<SelectTextField name="weight" label="enter weight" />
 					<SelectDropdown label="weight unit">
-						<MenuItem value="" disabled>
-							<em>None</em>
-						</MenuItem>
-						<MenuItem value={10}>Ten</MenuItem>
-						<MenuItem value={20}>Twenty</MenuItem>
-						<MenuItem value={30}>Thirty</MenuItem>
+						{wtUnits.map((unit) => (
+							<MenuItem value={unit}>{unit}</MenuItem>
+						))}
 					</SelectDropdown>
 				</Grid>
 				<Grid item xs={12} md={6} sx={{ display: 'flex' }}>
 					<SelectTextField name="height" label="enter height" />
 					<SelectDropdown label="height unit">
-						<MenuItem value="" disabled>
-							<em>None</em>
-						</MenuItem>
-						<MenuItem value={10}>Ten</MenuItem>
-						<MenuItem value={20}>Twenty</MenuItem>
-						<MenuItem value={30}>Thirty</MenuItem>
+						{htUnits.map((unit) => (
+							<MenuItem value={unit}>{unit}</MenuItem>
+						))}
 					</SelectDropdown>
 				</Grid>
 			</Grid>
@@ -58,12 +53,9 @@ const Edit = () => (
 				fullWidth
 			/>
 			<SelectDropdown label="looking for" sx={{ width: '100%' }}>
-				<MenuItem value="" disabled>
-					<em>None</em>
-				</MenuItem>
-				<MenuItem value={10}>Ten</MenuItem>
-				<MenuItem value={20}>Twenty</MenuItem>
-				<MenuItem value={30}>Thirty</MenuItem>
+				{usrStatus.map((status) => (
+					<MenuItem value={status}>{status}</MenuItem>
+				))}
 			</SelectDropdown>
 			<FormButton variant="contained">Save</FormButton>
 		</form>

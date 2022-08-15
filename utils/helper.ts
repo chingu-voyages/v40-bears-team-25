@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-import emailRegex from './constants'
+import { emailRegex } from './constants'
 
 const validationSchema = {
 	password: yup
