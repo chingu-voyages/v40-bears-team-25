@@ -3,6 +3,7 @@ import {
 	Grid,
 	IconButton,
 	InputAdornment,
+	styled,
 	SxProps,
 	TextField,
 	Theme,
@@ -22,6 +23,12 @@ export interface InputProps {
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
+const StyledTxtField = styled(TextField)`
+	fieldset {
+		border-radius: 15px;
+	}
+`
+
 const Input = ({
 	name,
 	label,
@@ -35,7 +42,7 @@ const Input = ({
 	onChange,
 }: InputProps) => (
 	<Grid item xs={12} sm={half ? 6 : 12}>
-		<TextField
+		<StyledTxtField
 			onChange={onChange}
 			name={name}
 			value={value}

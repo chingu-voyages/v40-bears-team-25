@@ -1,35 +1,19 @@
 import React from 'react'
-import Input from '@/components/Input'
-import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
-import {
-	Grid,
-	TextField,
-	Typography,
-	InputLabel,
-	MenuItem,
-	Avatar,
-	IconButton,
-} from '@mui/material'
+import { Grid, TextField, MenuItem, Avatar } from '@mui/material'
 import {
 	PageContainer,
 	SelectTextField,
-	SelectGroup,
-	CustomSelect,
 	FormButton,
-	LookingForDropdown,
 	AvatarEditContainer,
 	AvaEditBtn,
-	TitleMenuContainer,
 } from './edit.styled'
+import Input from '../../components/Input'
+import SelectDropdown from '../../components/SelectDropDown'
+import PageTitleDiv from '../../components/PageTitleDiv'
 
 const Edit = () => (
-	<PageContainer maxWidth="sm">
-		<TitleMenuContainer>
-			<IconButton>
-				<ArrowBackIosNewIcon />
-			</IconButton>
-			<Typography variant="h4">Edit Profile</Typography>
-		</TitleMenuContainer>
+	<PageContainer maxWidth="md">
+		<PageTitleDiv title="Edit Profile" />
 		<AvatarEditContainer>
 			<Avatar sx={{ width: 80, height: 80 }}>V</Avatar>
 			<AvaEditBtn variant="contained">change photo</AvaEditBtn>
@@ -42,31 +26,25 @@ const Edit = () => (
 			<Grid columnSpacing={1} container>
 				<Grid item xs={12} md={6} sx={{ display: 'flex' }}>
 					<SelectTextField name="weight" label="enter weight" />
-					<SelectGroup>
-						<InputLabel>weight unit</InputLabel>
-						<CustomSelect label="weight unit">
-							<MenuItem value="" disabled>
-								<em>None</em>
-							</MenuItem>
-							<MenuItem value={10}>Ten</MenuItem>
-							<MenuItem value={20}>Twenty</MenuItem>
-							<MenuItem value={30}>Thirty</MenuItem>
-						</CustomSelect>
-					</SelectGroup>
+					<SelectDropdown label="weight unit">
+						<MenuItem value="" disabled>
+							<em>None</em>
+						</MenuItem>
+						<MenuItem value={10}>Ten</MenuItem>
+						<MenuItem value={20}>Twenty</MenuItem>
+						<MenuItem value={30}>Thirty</MenuItem>
+					</SelectDropdown>
 				</Grid>
 				<Grid item xs={12} md={6} sx={{ display: 'flex' }}>
 					<SelectTextField name="height" label="enter height" />
-					<SelectGroup>
-						<InputLabel>height unit</InputLabel>
-						<CustomSelect label="height unit">
-							<MenuItem value="" disabled>
-								<em>None</em>
-							</MenuItem>
-							<MenuItem value={10}>Ten</MenuItem>
-							<MenuItem value={20}>Twenty</MenuItem>
-							<MenuItem value={30}>Thirty</MenuItem>
-						</CustomSelect>
-					</SelectGroup>
+					<SelectDropdown label="height unit">
+						<MenuItem value="" disabled>
+							<em>None</em>
+						</MenuItem>
+						<MenuItem value={10}>Ten</MenuItem>
+						<MenuItem value={20}>Twenty</MenuItem>
+						<MenuItem value={30}>Thirty</MenuItem>
+					</SelectDropdown>
 				</Grid>
 			</Grid>
 			<Input name="password" label="password" type="password" />
@@ -79,17 +57,14 @@ const Edit = () => (
 				rows={4}
 				fullWidth
 			/>
-			<LookingForDropdown>
-				<InputLabel>search status</InputLabel>
-				<CustomSelect label="search status">
-					<MenuItem value="" disabled>
-						<em>None</em>
-					</MenuItem>
-					<MenuItem value={10}>Ten</MenuItem>
-					<MenuItem value={20}>Twenty</MenuItem>
-					<MenuItem value={30}>Thirty</MenuItem>
-				</CustomSelect>
-			</LookingForDropdown>
+			<SelectDropdown label="looking for" sx={{ width: '100%' }}>
+				<MenuItem value="" disabled>
+					<em>None</em>
+				</MenuItem>
+				<MenuItem value={10}>Ten</MenuItem>
+				<MenuItem value={20}>Twenty</MenuItem>
+				<MenuItem value={30}>Thirty</MenuItem>
+			</SelectDropdown>
 			<FormButton variant="contained">Save</FormButton>
 		</form>
 	</PageContainer>
