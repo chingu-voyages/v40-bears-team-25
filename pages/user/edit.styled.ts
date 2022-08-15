@@ -1,4 +1,4 @@
-import { Container, TextField, styled, Button, Box } from '@mui/material'
+import { Container, TextField, styled, Button } from '@mui/material'
 
 export const PageContainer = styled(Container, {
 	name: 'PageContainer',
@@ -31,12 +31,7 @@ export const FormButton = styled(Button)`
 	background-color: ${(props) => props.theme.custom.blue};
 	border-radius: 15px;
 `
-export const AvatarEditContainer = styled(Box)`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
-`
+
 export const AvaEditBtn = styled(Button)`
 	padding: 10px;
 	background-color: ${(props) => props.theme.custom.blue};
