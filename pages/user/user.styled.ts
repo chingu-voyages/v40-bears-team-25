@@ -1,4 +1,4 @@
-import { Container, TextField, styled, Button } from '@mui/material'
+import { Container, TextField, styled, Button, Box } from '@mui/material'
 
 export const PageContainer = styled(Container, {
 	name: 'PageContainer',
@@ -35,4 +35,24 @@ export const FormButton = styled(Button)`
 export const AvaEditBtn = styled(Button)`
 	padding: 10px;
 	background-color: ${(props) => props.theme.custom.blue};
+`
+export const ChipBox = styled(Box)`
+	div:not(:last-child) {
+		margin-right: 10px;
+	}
+
+	div:nth-child(1n) {
+		background-color: ${(props) => props.theme.custom.liteYellow};
+		color: ${(props) => props.theme.custom.yellow};
+	}
+
+	div:nth-child(2n) {
+		background-color: ${(props) => props.theme.custom.litePurple};
+		color: #7a38ff;
+	}
+
+	div:nth-child(3n) {
+		background-color: ${(props) => props.theme.custom.liteBlue};
+		color: ${(props) => props.theme.custom.blue};
+	}
 `
