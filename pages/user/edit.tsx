@@ -103,7 +103,12 @@ const Edit = () => {
 								formik.touched.wt && formik.values.wt ? formik.errors.wt : null
 							}
 						/>
-						<SelectDropdown label="weight unit" value="kg">
+						<SelectDropdown
+							name="wtUnit"
+							value={formik.values.wtUnit}
+							onChange={formik.handleChange}
+							label="weight unit"
+						>
 							{wtUnits.map((unit) => (
 								<MenuItem value={unit} key={`editWtUnit_${unit}`}>
 									{unit}
@@ -123,7 +128,12 @@ const Edit = () => {
 								formik.touched.ht && formik.values.ht ? formik.errors.ht : null
 							}
 						/>
-						<SelectDropdown label="height unit" value="cm">
+						<SelectDropdown
+							name="htUnit"
+							value={formik.values.htUnit}
+							onChange={formik.handleChange}
+							label="height unit"
+						>
 							{htUnits.map((unit) => (
 								<MenuItem value={unit} key={`editHtUnit_${unit}`}>
 									{unit}
@@ -184,9 +194,11 @@ const Edit = () => {
 					onBlur={formik.handleBlur}
 				/>
 				<SelectDropdown
-					label="looking for"
+					name="trainingStatus"
+					value={formik.values.trainingStatus}
+					onChange={formik.handleChange}
+					label="Training Status"
 					sx={{ width: '100%' }}
-					value="inactive"
 				>
 					{usrStatus.map((status) => (
 						<MenuItem key={`editUsrStat_${status}`} value={status}>
