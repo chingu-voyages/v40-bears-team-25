@@ -1,7 +1,7 @@
 import { Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import React from 'react'
-import { Namebox, HandleUsername } from './NameBadgeCol.styled'
+import { Namebox, HandleUsername, FirstName } from './NameBadgeCol.styled'
 
 interface NameBadgeColInterface {
 	name: string
@@ -11,9 +11,7 @@ interface NameBadgeColInterface {
 
 const NameBadgeCol = ({ name, surname, handleName }: NameBadgeColInterface) => (
 	<Box>
-		<Typography variant="h2" sx={{ fontFamily: 'Heebo', fontWeight: 600 }}>
-			{name}
-		</Typography>
+		<FirstName variant="h2">{name}</FirstName>
 		<Namebox>
 			<Typography variant="h4" sx={{ fontWeight: 200, fontFamily: 'Heebo' }}>
 				{surname}

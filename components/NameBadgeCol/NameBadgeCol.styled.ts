@@ -1,6 +1,4 @@
-import { Typography } from '@mui/material'
-import { Box } from '@mui/system'
-import styled from 'styled-components'
+import { Typography, styled, Box } from '@mui/material'
 
 export const Namebox = styled(Box)`
 	display: flex;
@@ -10,4 +8,11 @@ export const Namebox = styled(Box)`
 export const HandleUsername = styled(Typography)`
 	font-weight: 200;
 	font-style: italic;
+`
+export const FirstName = styled(Typography)`
+	font-family: 'Heebo';
+	font-weight: 600;
+	${(props) => props.theme.breakpoints.down('sm')} {
+		font-size: 2.3em;
+	}
 `
