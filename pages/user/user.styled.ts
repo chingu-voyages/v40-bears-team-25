@@ -48,7 +48,7 @@ export const ChipBox = styled(Box)`
 
 	div:nth-child(2n) {
 		background-color: ${(props) => props.theme.custom.litePurple};
-		color: #7a38ff;
+		color: ${(props) => props.theme.custom.purple};
 	}
 
 	div:nth-child(3n) {

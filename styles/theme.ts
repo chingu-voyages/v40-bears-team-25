@@ -50,7 +50,7 @@ const theme = createTheme({
 		liteYellow: '#fff0cc',
 		liteOrange: '#fff0e4',
 		liteBlue: '#e5f7ff',
-		purple: '#fd1b4f',
+		purple: '#7a38ff',
 		pink: '#fd1b4f',
 		yellow: '#face65',
 		orange: '#ff6902',

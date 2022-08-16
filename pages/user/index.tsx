@@ -1,6 +1,8 @@
-import { Box, Button, Chip, Divider, Typography } from '@mui/material'
+import { Box, Chip, Divider, Typography } from '@mui/material'
 import React from 'react'
 import AvatarContainer from '../../components/AvatarContainer'
+import EditBtn from '../../components/Buttons/EditButton'
+import SignOutBtn from '../../components/Buttons/SignOutBtn'
 import NameBadgeCol from '../../components/NameBadgeCol'
 import PageSection from '../../components/PageSection'
 import PageTitleDiv from '../../components/PageTitleDiv'
@@ -29,9 +31,9 @@ const UserView = () => (
 			</Typography>
 		</PageSection>
 		<Divider sx={{ margin: '2em 0' }} />
-		<PageSection sectionTitle="Looking For">
+		<PageSection sectionTitle="Looking For" sx={{ marginBottom: '4em' }}>
 			<ChipBox>
-				<Chip label="Deletable" />
+				<Chip label="1" />
 				<Chip label="Deletable" />
 				<Chip label="Deletable" />
 				<Chip label="Deletable" />
@@ -42,9 +44,15 @@ const UserView = () => (
 				<Chip label="Deletable" />
 			</ChipBox>
 		</PageSection>
-		<Box>
-			<Button>Sign Out</Button>
-			<Button>Edit</Button>
+		<Box
+			sx={{
+				display: 'flex',
+				marginBottom: '4em',
+				justifyContent: 'space-evenly',
+			}}
+		>
+			<SignOutBtn sx={{ width: '45%' }}>Sign Out</SignOutBtn>
+			<EditBtn sx={{ width: '45%' }}>Edit</EditBtn>
 		</Box>
 	</PageContainer>
 )

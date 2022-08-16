@@ -1,11 +1,11 @@
-import { InputLabel } from '@mui/material'
+import { InputLabel, SxProps, Theme } from '@mui/material'
 import React from 'react'
 import { CustomSelect, SelectGroup } from './SelectDropDown.styled'
 
 interface SelectDropdownProps {
 	children: React.ReactNode
 	label: string
-	sx?: Record<string, unknown>
+	sx?: SxProps<Theme> | undefined
 	value: string
 }
 
