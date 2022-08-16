@@ -1,92 +1,96 @@
-import React, { useState } from 'react'
-import { useField } from 'formik'
-
+import React from 'react'
 import {
 	Grid,
 	IconButton,
 	InputAdornment,
-	FormControl,
-	InputLabel,
-	OutlinedInput,
-	FormHelperText,
+	styled,
+	SxProps,
+	TextField,
+	Theme,
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
-import CheckIcon from '@mui/icons-material/Check'
-import ClearIcon from '@mui/icons-material/Clear'
-import { useTheme } from '@mui/material/styles'
 
 export interface InputProps {
 	name: string
 	label: string
-	type: 'text' | 'password'
-	half: boolean
+	value?: string
+	type?: string
+	sx?: SxProps<Theme> | undefined
+	disabled?: boolean
+	handleShowPassword?: () => void
+	half?: boolean
+	autoFocus?: boolean
+	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+	helperText?: React.ReactNode | string
+	error?: boolean | undefined
+	onBlur?: (e: unknown) => void
 }
 
-const Input: React.FC<InputProps> = ({ ...props }) => {
-	const [field, meta] = useField(props)
-	const theme = useTheme()
-
-	const isError = Boolean(meta.error && meta.touched)
-	const isSuccess = Boolean(!meta.error && field.value)
-
-	const [toggleShowPassword, setToggleShowPassword] = useState<boolean>(false)
-
-	const handleToggleShowPassword = () => {
-		setToggleShowPassword((togglePassword) => !togglePassword)
+export const StyledTxtField = styled(TextField)`
+	fieldset {
+		border-radius: 15px;
 	}
+`
 
-	const PasswordIcon = props.type === 'password' && (
-		<IconButton
-			aria-label="toggle password visibility"
-			onClick={handleToggleShowPassword}
-			edge="end"
-		>
-			{toggleShowPassword ? <VisibilityOff /> : <Visibility />}
-		</IconButton>
-	)
+const Input = ({
+	name,
+	label,
+	half,
+	autoFocus,
+	type,
+	handleShowPassword,
+	value,
+	sx,
+	disabled,
+	onChange,
+	helperText,
+	error,
+	onBlur,
+}: InputProps) => (
+	<Grid item xs={12} sm={half ? 6 : 12}>
+		<StyledTxtField
+			onChange={onChange}
+			name={name}
+			value={value}
+			sx={sx}
+			disabled={disabled}
+			variant="outlined"
+			fullWidth
+			label={label}
+			helperText={helperText}
+			error={error}
+			onBlur={onBlur}
+			autoFocus={autoFocus}
+			type={type}
+			InputProps={
+				name === 'password'
+					? {
+							endAdornment: (
+								<InputAdornment position="end">
+									<IconButton onClick={handleShowPassword}>
+										{type === 'password' ? <Visibility /> : <VisibilityOff />}
+									</IconButton>
+								</InputAdornment>
+							),
+					  }
+					: undefined
+			}
+		/>
+	</Grid>
+)
 
-	const TextIcon = (isSuccess || isError) && props.type !== 'password' && (
-		<IconButton aria-label="verify check" edge="end">
-			{isError ? (
-				<ClearIcon sx={{ color: theme.custom.offlineRed }} />
-			) : (
-				<CheckIcon sx={{ color: theme.custom.green }} />
-			)}
-		</IconButton>
-	)
-
-	const inputType =
-		// eslint-disable-next-line no-nested-ternary
-		props.type !== 'password'
-			? props.type
-			: toggleShowPassword
-			? 'text'
-			: 'password'
-
-	return (
-		<Grid item xs={12} sm={props.half ? 6 : 12}>
-			<FormControl sx={{ width: '100%' }} variant="outlined" error={isError}>
-				<InputLabel htmlFor={`outlined-adornment-${props.name}`}>
-					{props.label}
-				</InputLabel>
-				<OutlinedInput
-					id="outlined-adornment-password"
-					name={props.name}
-					type={inputType}
-					onBlur={field.onBlur}
-					onChange={field.onChange}
-					endAdornment={
-						<InputAdornment position="end">
-							{PasswordIcon}
-							{TextIcon}
-						</InputAdornment>
-					}
-					label="Password"
-				/>
-				{isError && <FormHelperText>{meta.error}</FormHelperText>}
-			</FormControl>
-		</Grid>
-	)
+Input.defaultProps = {
+	sx: {},
+	disabled: false,
+	handleShowPassword: () => {},
+	half: false,
+	autoFocus: false,
+	type: 'text',
+	value: '',
+	onChange: () => {},
+	error: false,
+	helperText: '',
+	onBlur: '',
 }
 
 export default Input

@@ -22,6 +22,11 @@ export const SelectTextField = styled(TextField, {
 })`
 	width: 60%;
 	margin-right: 1em;
+
+	.MuiFormHelperText-root {
+		color: ${(props) => props.theme.custom.offlineRed};
+		font-size: 1em;
+	}
 `
 
 export const FormButton = styled(Button)`
