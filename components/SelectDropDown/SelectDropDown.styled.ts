@@ -1,12 +1,13 @@
-import { FormControl, Select, styled } from '@mui/material'
+import { styled, TextField } from '@mui/material'
 
-export const SelectGroup = styled(FormControl, {
+const SelectGroup = styled(TextField, {
 	name: 'SelectGroup',
 	slot: 'div',
 })`
 	flex-grow: 1;
-`
 
-export const CustomSelect = styled(Select)`
-	height: 56px;
+	.MuiInputBase-formControl {
+		height: 56px;
+	}
 `
+export default SelectGroup
