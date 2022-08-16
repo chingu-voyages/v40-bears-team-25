@@ -5,7 +5,7 @@ import {
 	SelectTextField,
 	FormButton,
 	AvaEditBtn,
-} from './edit.styled'
+} from './user.styled'
 import Input from '../../components/Input'
 import SelectDropdown from '../../components/SelectDropDown'
 import PageTitleDiv from '../../components/PageTitleDiv'

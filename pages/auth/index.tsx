@@ -10,8 +10,8 @@ import {
 import React, { useState } from 'react'
 import { Formik, Form } from 'formik'
 import * as yup from 'yup'
-import Input from '@/components/Input'
-import validationSchema from '@/utils/helper'
+import Input from '../../components/Input'
+import validationSchema from '@../../utils/helper'
 
 const Auth = () => {
 	const [isSignedUp, setIsSignedUp] = useState(false)

@@ -4,7 +4,7 @@ import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew'
 import PageTitleContainer from './PageTitle.styled'
 
 interface PageTitleDivProps {
-	title: string
+	title?: string
 }
 
 const PageTitleDiv = ({ title }: PageTitleDivProps) => (
@@ -15,5 +15,9 @@ const PageTitleDiv = ({ title }: PageTitleDivProps) => (
 		<Typography variant="h4">{title}</Typography>
 	</PageTitleContainer>
 )
+
+PageTitleDiv.defaultProps = {
+	title: '',
+}
 
 export default PageTitleDiv
