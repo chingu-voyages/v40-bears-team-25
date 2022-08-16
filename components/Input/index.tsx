@@ -21,9 +21,12 @@ export interface InputProps {
 	half?: boolean
 	autoFocus?: boolean
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+	helperText?: React.ReactNode | string
+	error?: boolean | undefined
+	onBlur?: (e: unknown) => void
 }
 
-const StyledTxtField = styled(TextField)`
+export const StyledTxtField = styled(TextField)`
 	fieldset {
 		border-radius: 15px;
 	}
@@ -40,6 +43,9 @@ const Input = ({
 	sx,
 	disabled,
 	onChange,
+	helperText,
+	error,
+	onBlur,
 }: InputProps) => (
 	<Grid item xs={12} sm={half ? 6 : 12}>
 		<StyledTxtField
@@ -51,6 +57,9 @@ const Input = ({
 			variant="outlined"
 			fullWidth
 			label={label}
+			helperText={helperText}
+			error={error}
+			onBlur={onBlur}
 			autoFocus={autoFocus}
 			type={type}
 			InputProps={
@@ -79,6 +88,9 @@ Input.defaultProps = {
 	type: 'text',
 	value: '',
 	onChange: () => {},
+	error: false,
+	helperText: '',
+	onBlur: '',
 }
 
 export default Input

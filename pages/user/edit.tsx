@@ -1,74 +1,205 @@
+/* eslint-disable no-console */
+/* eslint-disable spaced-comment */
 import React from 'react'
-import { Grid, TextField, MenuItem } from '@mui/material'
+import { Grid, MenuItem } from '@mui/material'
+import { useFormik } from 'formik'
+import * as yup from 'yup'
 import {
 	PageContainer,
 	SelectTextField,
 	FormButton,
 	AvaEditBtn,
 } from './user.styled'
-import Input from '../../components/Input'
+import Input, { StyledTxtField } from '../../components/Input'
 import SelectDropdown from '../../components/SelectDropDown'
 import PageTitleDiv from '../../components/PageTitleDiv'
-import { wtUnits, htUnits, usrStatus } from '../../utils/constants'
+import {
+	wtUnits,
+	htUnits,
+	usrStatus,
+	editFormInitValues,
+} from '../../utils/constants'
 import AvatarContainer from '../../components/AvatarContainer'
+import { editProfileValidationSchema } from '../../utils/helper'
 
-const Edit = () => (
-	<PageContainer maxWidth="md">
-		<PageTitleDiv title="Edit Profile" />
-		<AvatarContainer avatarContent="V">
-			<AvaEditBtn variant="contained">change photo</AvaEditBtn>
-		</AvatarContainer>
-		<form>
-			<Input name="first_name" label="first name" />
-			<Input name="surname" label="surname" />
-			<Input name="username" label="username" />
-			<Input name="email" label="email" />
-			<Grid columnSpacing={1} container>
-				<Grid item xs={12} md={6} sx={{ display: 'flex' }}>
-					<SelectTextField name="weight" label="enter weight" />
-					<SelectDropdown label="weight unit" value="kg">
-						{wtUnits.map((unit) => (
-							<MenuItem value={unit} key={`editWtUnit_${unit}`}>
-								{unit}
-							</MenuItem>
-						))}
-					</SelectDropdown>
+const Edit = () => {
+	const formik = useFormik({
+		initialValues: editFormInitValues,
+		validationSchema: yup.object(editProfileValidationSchema),
+		onSubmit: (values) => {
+			//submit to api
+			console.log(values)
+		},
+	})
+	return (
+		<PageContainer maxWidth="md">
+			<PageTitleDiv title="Edit Profile" />
+			<AvatarContainer avatarContent="V">
+				<AvaEditBtn variant="contained">change photo</AvaEditBtn>
+			</AvatarContainer>
+			<form onSubmit={formik.handleSubmit}>
+				<Input
+					name="firstName"
+					label="first name"
+					value={formik.values.firstName}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+					error={formik.touched.firstName && Boolean(formik.errors.firstName)}
+					helperText={
+						formik.touched.firstName && formik.values.firstName
+							? formik.errors.firstName
+							: null
+					}
+				/>
+				<Input
+					name="surname"
+					label="surname"
+					value={formik.values.surname}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+					error={formik.touched.surname && Boolean(formik.errors.surname)}
+					helperText={
+						formik.touched.surname && formik.values.surname
+							? formik.errors.surname
+							: null
+					}
+				/>
+				<Input
+					name="username"
+					label="username"
+					value={formik.values.username}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+					error={formik.touched.username && Boolean(formik.errors.username)}
+					helperText={
+						formik.touched.username && formik.values.username
+							? formik.errors.username
+							: null
+					}
+				/>
+				<Input
+					name="email"
+					label="email"
+					value={formik.values.email}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+					error={formik.touched.email && Boolean(formik.errors.email)}
+					helperText={
+						formik.touched.email && formik.values.email
+							? formik.errors.email
+							: null
+					}
+				/>
+				<Grid columnSpacing={1} container>
+					<Grid item xs={12} md={6} sx={{ display: 'flex' }}>
+						<SelectTextField
+							name="wt"
+							label="enter weight"
+							value={formik.values.wt}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							error={formik.touched.wt && Boolean(formik.errors.wt)}
+							helperText={
+								formik.touched.wt && formik.values.wt ? formik.errors.wt : null
+							}
+						/>
+						<SelectDropdown label="weight unit" value="kg">
+							{wtUnits.map((unit) => (
+								<MenuItem value={unit} key={`editWtUnit_${unit}`}>
+									{unit}
+								</MenuItem>
+							))}
+						</SelectDropdown>
+					</Grid>
+					<Grid item xs={12} md={6} sx={{ display: 'flex' }}>
+						<SelectTextField
+							name="ht"
+							label="enter height"
+							value={formik.values.ht}
+							onChange={formik.handleChange}
+							onBlur={formik.handleBlur}
+							error={formik.touched.ht && Boolean(formik.errors.ht)}
+							helperText={
+								formik.touched.ht && formik.values.ht ? formik.errors.ht : null
+							}
+						/>
+						<SelectDropdown label="height unit" value="cm">
+							{htUnits.map((unit) => (
+								<MenuItem value={unit} key={`editHtUnit_${unit}`}>
+									{unit}
+								</MenuItem>
+							))}
+						</SelectDropdown>
+					</Grid>
 				</Grid>
-				<Grid item xs={12} md={6} sx={{ display: 'flex' }}>
-					<SelectTextField name="height" label="enter height" />
-					<SelectDropdown label="height unit" value="cm">
-						{htUnits.map((unit) => (
-							<MenuItem value={unit} key={`editHtUnit_${unit}`}>
-								{unit}
-							</MenuItem>
-						))}
-					</SelectDropdown>
-				</Grid>
-			</Grid>
-			<Input name="password" label="password" type="password" />
-			<Input name="confirm_password" label="confirm password" type="password" />
-			<TextField name="bio" label="bio" multiline rows={4} fullWidth />
-			<TextField
-				name="train_category"
-				label="looking for..."
-				multiline
-				rows={4}
-				fullWidth
-			/>
-			<SelectDropdown
-				label="looking for"
-				sx={{ width: '100%' }}
-				value="inactive"
-			>
-				{usrStatus.map((status) => (
-					<MenuItem key={`editUsrStat_${status}`} value={status}>
-						{status}
-					</MenuItem>
-				))}
-			</SelectDropdown>
-			<FormButton variant="contained">Save</FormButton>
-		</form>
-	</PageContainer>
-)
+				<Input
+					name="password"
+					label="password"
+					type="password"
+					value={formik.values.password}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+					error={formik.touched.password && Boolean(formik.errors.password)}
+					helperText={
+						formik.touched.password && formik.values.password
+							? formik.errors.password
+							: null
+					}
+				/>
+				<Input
+					name="confirmPassword"
+					label="confirm password"
+					type="password"
+					value={formik.values.confirmPassword}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+					error={
+						formik.touched.confirmPassword &&
+						Boolean(formik.errors.confirmPassword)
+					}
+					helperText={
+						formik.touched.confirmPassword && formik.values.confirmPassword
+							? formik.errors.confirmPassword
+							: null
+					}
+				/>
+				<StyledTxtField
+					name="bio"
+					label="bio"
+					multiline
+					rows={4}
+					fullWidth
+					value={formik.values.bio}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+				/>
+				<StyledTxtField
+					name="trainCategories"
+					label="looking for..."
+					multiline
+					rows={4}
+					fullWidth
+					value={formik.values.trainCategories}
+					onChange={formik.handleChange}
+					onBlur={formik.handleBlur}
+				/>
+				<SelectDropdown
+					label="looking for"
+					sx={{ width: '100%' }}
+					value="inactive"
+				>
+					{usrStatus.map((status) => (
+						<MenuItem key={`editUsrStat_${status}`} value={status}>
+							{status}
+						</MenuItem>
+					))}
+				</SelectDropdown>
+				<FormButton variant="contained" type="submit">
+					Save
+				</FormButton>
+			</form>
+		</PageContainer>
+	)
+}
 
 export default Edit
