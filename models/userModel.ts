@@ -1,11 +1,4 @@
-import {
-	Schema,
-	model,
-	models,
-	Document,
-	Model,
-	ToObjectOptions,
-} from 'mongoose'
+import { Schema, model, models, Document, Model } from 'mongoose'
 
 // Extends document is used to make methods like .save() available when creating a new User
 interface IUser extends Document {
@@ -13,14 +6,41 @@ interface IUser extends Document {
 	passwordHash: string
 	firstName: string
 	lastName: string
+	userType: 'personalTrainer' | 'customer'
+	profile: {
+		username: string
+		bio: string
+	}
+	customerData: {
+		trainingGoal: any // CHANGE
+		personalTrainer: Schema.Types.ObjectId
+		measurements: {
+			height: number
+			weight: number
+			unit: 'metric' | 'imperial'
+		}
+	}
+	personalTrainerData: {
+		rating: number
+		// customers and reviews are virtual properties
+	}
 }
 
+// The Schema follows the Principle of Least Cardinality: if there is a one-to-many
+// relationship, the reference is stored on the "many" side to avoid
+// huge document sizes.
+// Virtual populate are used to get the populated references on the "one" side.
+// Fields that follow the Principle of Least Cardinality:
+// - Personal Trainer -> Customers
+// - User -> Shared Files
+// - Personal Trainer -> Reviews
 const userSchema = new Schema({
 	email: {
 		type: String,
 		required: true,
 		unique: true,
 		match: /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/,
+		lowercase: true,
 	},
 	passwordHash: {
 		type: String,
@@ -38,7 +58,61 @@ const userSchema = new Schema({
 		minLength: 3,
 		maxLength: 15,
 	},
-	// Profile -> bio, profileType, rating, personalTrainer, sharedfiles
+	userType: {
+		type: String,
+		enum: ['personalTrainer', 'customer'],
+		default: 'customer',
+	},
+	profile: {
+		username: {
+			type: String,
+			min: 3,
+			max: 15,
+			unique: true,
+		},
+		bio: String,
+	},
+	customerData: {
+		measurements: {
+			weight: Number,
+			height: Number,
+			unit: {
+				type: String,
+				enum: UNIT_SYSTEMS,
+				default: 'metric',
+			},
+		},
+		// Principle of Least Cardinality
+		personalTrainer: {
+			type: Schema.Types.ObjectId,
+			ref: 'User',
+		},
+		trainingGoal: {
+			type: String,
+			enum: TRAINING_GOALS,
+		},
+	},
+	personalTrainerData: {
+		rating: Number,
+	},
+})
+
+userSchema.virtual('personalTrainerData.customers', {
+	ref: 'User',
+	localField: '_id',
+	foreignField: 'customerData.personalTrainer',
+})
+
+userSchema.virtual('personalTrainerData.reviews', {
+	ref: 'User',
+	localField: '_id',
+	foreignField: 'reviewee',
+})
+
+userSchema.virtual('files', {
+	ref: 'File',
+	localField: '_id',
+	foreignField: 'users', // HOW TO DO .INCLUDE?
 })
 
 /* eslint-disable no-underscore-dangle */
