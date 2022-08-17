@@ -1,13 +1,16 @@
 import * as yup from 'yup'
 
-import emailRegex from './constants'
+import { passwordRegex } from './constants'
 
 const validationSchema = {
+	firstname: yup.string().required('First Name is required'),
+	lastname: yup.string().required('First Name is required'),
+	username: yup.string().required('User Name is required'),
 	password: yup
 		.string()
 		.required('Password is required')
 		.min(8, 'Password must be 8 characters or more')
-		.matches(emailRegex, 'Password must contain a special character'),
+		.matches(passwordRegex, 'Password must contain a special character'),
 	dynamic: (title: string) => yup.string().required(`${title} is required`),
 	email: yup
 		.string()
