@@ -1,5 +1,12 @@
 import { Button, styled } from '@mui/material'
 
+export const PrimaryBtn = styled(Button)`
+	padding: 1.4em;
+	background-color: ${(props) => props.theme.custom.blue};
+	color: white;
+	border-radius: 15px;
+`
+
 export const EditButtonContainer = styled(Button)`
 	width: 100%;
 	padding: 1.4em;
