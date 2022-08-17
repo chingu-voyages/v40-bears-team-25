@@ -8,13 +8,14 @@ import {
 	InputLabel,
 	OutlinedInput,
 	FormHelperText,
+	OutlinedInputProps,
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import CheckIcon from '@mui/icons-material/Check'
 import ClearIcon from '@mui/icons-material/Clear'
 import { useTheme } from '@mui/material/styles'
 
-export interface InputProps {
+export interface InputProps extends OutlinedInputProps {
 	name: string
 	label: string
 	half: boolean
@@ -25,7 +26,7 @@ export interface InputProps {
 }
 
 const Input: React.FC<InputProps> = ({ ...props }) => {
-	const [field, meta] = useField(props)
+	const [field, meta] = useField(props.name)
 	const theme = useTheme()
 
 	const isError = Boolean(meta.error && meta.touched)
