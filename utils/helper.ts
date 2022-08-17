@@ -49,4 +49,9 @@ export const editProfileValidationSchema = {
 		.required('Please Enter Height')
 		.max(213, 'Are you serious?, you are that tall?🙃')
 		.min(92, 'Must be taller than 92cm/3ft'),
+	htUnit: yup.string().required('Select a height unit').oneOf(['cm', 'in']),
+	wtUnit: yup.string().required('Select a weight unit').oneOf(['kg', 'lb']),
+	trainingStatus: yup.string().required('Indicate training status'),
+	bio: yup.string(),
+	trainingCategories: yup.string(),
 }
