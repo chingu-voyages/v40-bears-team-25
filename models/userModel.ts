@@ -1,4 +1,11 @@
-import { Schema, model, models, Document, Model } from 'mongoose'
+import {
+	Schema,
+	model,
+	models,
+	Document,
+	Model,
+	ToObjectOptions,
+} from 'mongoose'
 
 // Extends document is used to make methods like .save() available when creating a new User
 interface IUser extends Document {
@@ -36,18 +43,25 @@ const userSchema = new Schema({
 
 /* eslint-disable no-underscore-dangle */
 /* eslint-disable no-param-reassign */
+type TransformFunc = ToObjectOptions['transform']
+const transformFunction: TransformFunc = (document, returnedObject) => {
+	returnedObject.id = returnedObject._id.toString()
+
+	delete returnedObject.passwordHash
+	delete returnedObject._id
+	delete returnedObject.__v
+}
+
 /**
  * Edits the document returned from the Database by removing the passwordHash, _id, __v
  * and creating a id property
  */
 userSchema.set('toJSON', {
-	transform: (document, returnedObject) => {
-		returnedObject.id = returnedObject._id.toString()
+	transform: transformFunction,
+})
 
-		delete returnedObject.passwordHash
-		delete returnedObject._id
-		delete returnedObject.__v
-	},
+userSchema.set('toObject', {
+	transform: transformFunction,
 })
 
 const User = (models.User as Model<IUser>) || model<IUser>('User', userSchema)
