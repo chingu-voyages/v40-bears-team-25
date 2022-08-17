@@ -1,1 +1,0 @@
-In this folder, you should create the mongoose models for the backend
