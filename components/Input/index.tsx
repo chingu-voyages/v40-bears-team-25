@@ -19,7 +19,6 @@ import { useTheme } from '@mui/material/styles'
 export interface InputProps extends OutlinedInputProps {
 	name: string
 	label: string
-	type: 'text' | 'password'
 	half: boolean
 }
 
