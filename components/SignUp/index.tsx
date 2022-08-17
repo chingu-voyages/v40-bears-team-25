@@ -9,7 +9,7 @@ import { PrimaryBtn } from '../Buttons/Buttons'
 
 const SignUp: React.FC = () => {
 	const initialState = { email: '', password: '' }
-	const { firstname, lastname, username, password, email, confirmPassword } =
+	const { firstName, lastName, username, password, email, confirmPassword } =
 		validationSchema
 
 	const handleSubmit = async (values: typeof initialState) => {
@@ -21,8 +21,8 @@ const SignUp: React.FC = () => {
 			<Formik
 				initialValues={initialState}
 				validationSchema={yup.object({
-					firstname,
-					lastname,
+					firstName,
+					lastName,
 					username,
 					confirmPassword,
 					email,
@@ -33,12 +33,12 @@ const SignUp: React.FC = () => {
 				<Form>
 					<Grid container spacing={2}>
 						<Input
-							name="firstname"
+							name="firstName"
 							label="First Name"
 							type="text"
 							half={false}
 						/>
-						<Input name="lastname" label="Last Name" type="text" half={false} />
+						<Input name="lastName" label="Last Name" type="text" half={false} />
 
 						<Input name="username" label="Username" type="text" half />
 

@@ -3,8 +3,8 @@ import * as yup from 'yup'
 import { passwordRegex } from './constants'
 
 export const validationSchema = {
-	firstname: yup.string().required('First Name is required'),
-	lastname: yup.string().required('First Name is required'),
+	firstName: yup.string().required('First Name is required'),
+	lastName: yup.string().required('First Name is required'),
 	username: yup.string().required('User Name is required'),
 	password: yup
 		.string()
