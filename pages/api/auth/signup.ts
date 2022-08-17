@@ -3,8 +3,17 @@ import { handleError, database } from '../../../lib'
 import hashPassword from '../../../lib/hashPassword'
 import User from '../../../models/userModel'
 
+interface SignUpRequest extends NextApiRequest {
+	body: {
+		firstName?: string
+		lastName?: string
+		email?: string
+		password?: string
+	}
+}
+
 export default async function handleSignup(
-	req: NextApiRequest,
+	req: SignUpRequest,
 	res: NextApiResponse
 ) {
 	// If it is not a POST request, a Bad Response is returned
