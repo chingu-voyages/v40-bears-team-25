@@ -2,13 +2,13 @@ import { Button, Box, Grid } from '@mui/material'
 import React from 'react'
 import { Formik, Form } from 'formik'
 import * as yup from 'yup'
-import validationSchema from '@/utils/helper'
+import { validationSchema } from '@/utils/helper'
 
 import Input from '@/components/Input'
 
 const SignUp: React.FC = () => {
 	const initialState = { email: '', password: '' }
-	const { firstname, lastname, username, password, email, confirmPassword } =
+	const { firstName, lastName, username, password, email, confirmPassword } =
 		validationSchema
 
 	const handleSubmit = async (values: typeof initialState) => {
@@ -20,8 +20,8 @@ const SignUp: React.FC = () => {
 			<Formik
 				initialValues={initialState}
 				validationSchema={yup.object({
-					firstname,
-					lastname,
+					firstName,
+					lastName,
 					username,
 					confirmPassword,
 					email,

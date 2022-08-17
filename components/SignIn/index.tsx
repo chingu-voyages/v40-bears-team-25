@@ -2,7 +2,7 @@ import { Button, Box, Grid } from '@mui/material'
 import React from 'react'
 import { Formik, Form } from 'formik'
 import * as yup from 'yup'
-import validationSchema from '@/utils/helper'
+import { validationSchema } from '@/utils/helper'
 
 import Input from '@/components/Input'
 
