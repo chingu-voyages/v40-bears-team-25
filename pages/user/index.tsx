@@ -1,9 +1,8 @@
+import StyldButton from '@/components/Buttons'
 import { Box, Chip, Divider, Typography } from '@mui/material'
 import Link from 'next/link'
 import React from 'react'
 import AvatarContainer from '../../components/AvatarContainer'
-import EditBtn from '../../components/Buttons/EditButton'
-import SignOutBtn from '../../components/Buttons/SignOutBtn'
 import NameBadgeCol from '../../components/NameBadgeCol'
 import PageSection from '../../components/PageSection'
 import PageTitleDiv from '../../components/PageTitleDiv'
@@ -65,11 +64,11 @@ const UserView = ({ ...props }: UserViewProps) => {
 			}}
 		>
 			<Link passHref href="/" onClick={handleSignOutClick}>
-				<SignOutBtn sx={{ width: '45%' }}>Sign Out</SignOutBtn>
+				<StyldButton sx={{ width: '45%' }}>Sign Out</StyldButton>
 			</Link>
 			{/* NEED USERID => DYNAMIC ROUTING */}
 			<Link passHref href="/user/edit" onClick={handleSignOutClick}>
-				<EditBtn sx={{ width: '45%' }}>Edit</EditBtn>
+				<StyldButton sx={{ width: '45%' }}>Edit</StyldButton>
 			</Link>
 		</Box>
 	</PageContainer>

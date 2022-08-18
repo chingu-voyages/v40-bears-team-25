@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useField } from 'formik'
-
 import {
 	Grid,
 	IconButton,
@@ -19,7 +18,10 @@ export interface InputProps {
 	name: string
 	label: string
 	half: boolean
-	type: 'text' | 'password'
+	type: 'text' | 'password' | 'number'
+	multiline?: boolean
+	rows?: number
+	fullWidth?: boolean
 }
 
 const Input: React.FC<InputProps> = ({ ...props }) => {
@@ -89,6 +91,12 @@ const Input: React.FC<InputProps> = ({ ...props }) => {
 			</FormControl>
 		</Grid>
 	)
+}
+
+Input.defaultProps = {
+	multiline: false,
+	rows: 0,
+	fullWidth: false,
 }
 
 export default Input

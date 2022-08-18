@@ -2,10 +2,9 @@ import { Box, Grid } from '@mui/material'
 import React from 'react'
 import { Formik, Form } from 'formik'
 import * as yup from 'yup'
-import { validationSchema } from '@/utils/helper'
-
+import validationSchema from '@/utils/helper'
 import Input from '@/components/Input'
-import { PrimaryBtn } from '../Buttons/Buttons'
+import StyldButton from '../Buttons'
 
 const SignIn: React.FC = () => {
 	const initialState = { email: '', password: '' }
@@ -36,7 +35,7 @@ const SignIn: React.FC = () => {
 						/>
 
 						<Grid item xs={12}>
-							<PrimaryBtn
+							<StyldButton
 								color="primary"
 								variant="contained"
 								fullWidth
@@ -44,7 +43,7 @@ const SignIn: React.FC = () => {
 								style={{ marginTop: '10px' }}
 							>
 								Sign In
-							</PrimaryBtn>
+							</StyldButton>
 						</Grid>
 					</Grid>
 				</Form>

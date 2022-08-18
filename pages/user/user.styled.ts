@@ -11,10 +11,6 @@ export const PageContainer = styled(Container, {
 	div {
 		margin-top: 7px;
 	}
-
-	fieldset {
-		border-radius: 15px;
-	}
 `
 
 export const SelectTextField = styled(Input, {
@@ -27,14 +23,6 @@ export const SelectTextField = styled(Input, {
 		color: ${(props) => props.theme.custom.offlineRed};
 		font-size: 1em;
 	}
-`
-
-export const FormButton = styled(Button)`
-	margin: 2em 0 1em 0;
-	width: 100%;
-	padding: 1.4em;
-	background-color: ${(props) => props.theme.custom.blue};
-	border-radius: 15px;
 `
 
 export const AvaEditBtn = styled(Button)`
