@@ -4,7 +4,7 @@ import { StatItemContainer } from './StateBox.styled'
 
 interface StatItemInterface {
 	top: string
-	center: string
+	center: string | number
 	bottom: string
 }
 

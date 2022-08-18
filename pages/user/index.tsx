@@ -1,4 +1,5 @@
 import { Box, Chip, Divider, Typography } from '@mui/material'
+import Link from 'next/link'
 import React from 'react'
 import AvatarContainer from '../../components/AvatarContainer'
 import EditBtn from '../../components/Buttons/EditButton'
@@ -10,38 +11,50 @@ import StatBox from '../../components/StatBox'
 import StatItem from '../../components/StatBox/StatItem'
 import { ChipBox, PageContainer } from './user.styled'
 
-const UserView = () => (
-	<PageContainer maxWidth="sm">
+interface UserViewProps {
+	name: string
+	lastName: string
+	userName: string
+	avatarContent: string
+	bio: string
+	trainingStatus: string
+	trainingCategories: string[]
+	wt: number
+	wtUnit: string
+	bmi: number
+	bmiCategory: string
+}
+
+const UserView = ({ ...props }: UserViewProps) => {
+	const handleSignOutClick = () => {
+		// eslint-disable-next-line spaced-comment
+		//clears potiential cookies, tokens, and userInformation in browser
+	}
+
+	;<PageContainer maxWidth="sm">
 		<PageTitleDiv />
-		<AvatarContainer avatarContent="V">
-			<NameBadgeCol name="Valentino" surname="Rossi" handleName="@valeR46" />
+		<AvatarContainer avatarContent={props.avatarContent}>
+			<NameBadgeCol
+				name={props.name}
+				surname={props.lastName}
+				handleName={`@${props.userName}`}
+			/>
 		</AvatarContainer>
 		<StatBox>
-			<StatItem top="Training" center="looking" bottom="Status" />
-			<StatItem top="weight" center="69" bottom="kg" />
-			<StatItem top="BMI" center="21,1" bottom="normal" />
+			<StatItem top="Training" center={props.trainingStatus} bottom="Status" />
+			<StatItem top="weight" center={props.wt} bottom={props.wtUnit} />
+			<StatItem top="BMI" center={props.bmi} bottom={props.bmiCategory} />
 		</StatBox>
 		<Divider sx={{ margin: '2em 0' }} />
 		<PageSection sectionTitle="About">
-			<Typography sx={{ textAlign: 'center' }}>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-				tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-				veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-				commodo consequat.
-			</Typography>
+			<Typography sx={{ textAlign: 'center' }}>{props.bio}</Typography>
 		</PageSection>
 		<Divider sx={{ margin: '2em 0' }} />
 		<PageSection sectionTitle="Looking For" sx={{ marginBottom: '4em' }}>
 			<ChipBox>
-				<Chip label="1" />
-				<Chip label="Deletable" />
-				<Chip label="Deletable" />
-				<Chip label="Deletable" />
-				<Chip label="Deletable" />
-				<Chip label="Deletable" />
-				<Chip label="Deletable" />
-				<Chip label="Deletable" />
-				<Chip label="Deletable" />
+				{props.trainingCategories?.map((cat) => (
+					<Chip key={`chipy_${cat}`} label={cat} />
+				)) || 'Client do not indicate any specific training'}
 			</ChipBox>
 		</PageSection>
 		<Box
@@ -51,10 +64,15 @@ const UserView = () => (
 				justifyContent: 'space-evenly',
 			}}
 		>
-			<SignOutBtn sx={{ width: '45%' }}>Sign Out</SignOutBtn>
-			<EditBtn sx={{ width: '45%' }}>Edit</EditBtn>
+			<Link passHref href="/" onClick={handleSignOutClick}>
+				<SignOutBtn sx={{ width: '45%' }}>Sign Out</SignOutBtn>
+			</Link>
+			{/* NEED USERID => DYNAMIC ROUTING */}
+			<Link passHref href="/user/edit" onClick={handleSignOutClick}>
+				<EditBtn sx={{ width: '45%' }}>Edit</EditBtn>
+			</Link>
 		</Box>
 	</PageContainer>
-)
+}
 
 export default UserView
