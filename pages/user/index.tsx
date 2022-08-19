@@ -9,7 +9,6 @@ import NameBadgeCol from '../../components/NameBadgeCol'
 import PageSection from '../../components/PageSection'
 import PageTitleDiv from '../../components/PageTitleDiv'
 import StatBox from '../../components/StatBox'
-import StatItem from '../../components/StatBox/StatItem'
 import { ChipBox, PageContainer } from './user.styled'
 
 interface UserViewProps {

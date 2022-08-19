@@ -8,25 +8,20 @@ import {
 	InputLabel,
 	OutlinedInput,
 	FormHelperText,
-	OutlinedInputProps,
 } from '@mui/material'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 import CheckIcon from '@mui/icons-material/Check'
 import ClearIcon from '@mui/icons-material/Clear'
 import { useTheme } from '@mui/material/styles'
 
-export interface InputProps extends OutlinedInputProps {
+export interface InputProps {
 	name: string
 	label: string
 	half: boolean
-	type: 'text' | 'password' | 'number'
-	multiline?: boolean
-	rows?: number
-	fullWidth?: boolean
 }
 
 const Input: React.FC<InputProps> = ({ ...props }) => {
-	const [field, meta] = useField(props.name)
+	const [field, meta] = useField(props)
 	const theme = useTheme()
 
 	const isError = Boolean(meta.error && meta.touched)
@@ -76,7 +71,6 @@ const Input: React.FC<InputProps> = ({ ...props }) => {
 					// eslint-disable-next-line react/jsx-props-no-spreading
 					{...props}
 					id="outlined-adornment-password"
-					sx={{ borderRadius: '15px' }}
 					name={props.name}
 					type={inputType}
 					onBlur={field.onBlur}
