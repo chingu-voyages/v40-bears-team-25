@@ -4,7 +4,11 @@ import { StatItemContainer } from './StateBox.styled'
 
 interface StatItemInterface {
 	top: string
+<<<<<<< HEAD
 	center: string | number
+=======
+	center: string
+>>>>>>> 0e95c16 (feature: add reusable components)
 	bottom: string
 }
 
