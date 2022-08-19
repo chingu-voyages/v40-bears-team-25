@@ -1,12 +1,13 @@
 import { Schema, model, models, Document, Model } from 'mongoose'
 
-// Extends document is used to make methods like .save() available when creating a new User
-interface IReview extends Document {
+export interface ReviewAttrs {
 	reviewer: Schema.Types.ObjectId
 	reviewee: Schema.Types.ObjectId
 	reviewText?: string
 	rating: number
 }
+// Extends document is used to make methods like .save() available when creating a new User
+interface IReview extends Document, ReviewAttrs {}
 
 const reviewSchema = new Schema({
 	reviewer: {

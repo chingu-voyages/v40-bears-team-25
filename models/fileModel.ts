@@ -1,10 +1,12 @@
 import { Schema, model, models, Document, Model } from 'mongoose'
 
-// Extends document is used to make methods like .save() available when creating a new User
-interface IFile extends Document {
+export interface FileAttrs {
 	url: string
-	users: Schema.Types.ObjectId
+	users: Schema.Types.ObjectId[]
 }
+
+// Extends document is used to make methods like .save() available when creating a new User
+interface IFile extends Document, FileAttrs {}
 
 const fileSchema = new Schema({
 	url: {
