@@ -36,5 +36,3 @@ const validationSchema = {
 	bio: yup.string(),
 	trainingCategories: yup.string(),
 }
-
-export default validationSchema;

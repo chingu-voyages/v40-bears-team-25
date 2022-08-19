@@ -18,6 +18,7 @@ export interface InputProps {
 	name: string
 	label: string
 	half: boolean
+	type: 'text' | 'password'
 }
 
 const Input: React.FC<InputProps> = ({ ...props }) => {
