@@ -83,7 +83,7 @@ describe('User Model', () => {
 		})
 	})
 
-	afterAll(() => {
-		database.disconnectMongo()
+	afterAll(async () => {
+		await database.disconnectMongo()
 	})
 })
