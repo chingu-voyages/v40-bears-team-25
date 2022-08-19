@@ -4,11 +4,6 @@ const SelectGroup = styled(TextField, {
 	name: 'SelectGroup',
 	slot: 'div',
 })`
-<<<<<<< HEAD
-	position: relative;
-	top: 7px;
-=======
->>>>>>> 0e95c16 (feature: add reusable components)
 	flex-grow: 1;
 
 	.MuiInputBase-formControl {
