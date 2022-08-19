@@ -1,29 +1,47 @@
-import { Schema, model, models, Document, Model } from 'mongoose'
+import {
+	Schema,
+	model,
+	models,
+	Document,
+	Model,
+	ToObjectOptions,
+} from 'mongoose'
 
+const UNIT_SYSTEMS = ['metric', 'imperial']
+const TRAINING_GOALS = ['mass']
 // Extends document is used to make methods like .save() available when creating a new User
-interface IUser extends Document {
+
+export interface UserAttrs {
 	email: string
 	passwordHash: string
 	firstName: string
 	lastName: string
 	userType: 'personalTrainer' | 'customer'
 	profile: {
-		username: string
-		bio: string
+		username?: string
+		bio?: string
 	}
 	customerData: {
-		trainingGoal: any // CHANGE
-		personalTrainer: Schema.Types.ObjectId
+		trainingGoal?: any // CHANGE
+		personalTrainer?: Schema.Types.ObjectId
 		measurements: {
-			height: number
-			weight: number
+			height?: number
+			weight?: number
 			unit: 'metric' | 'imperial'
 		}
 	}
-	personalTrainerData: {
-		rating: number
-		// customers and reviews are virtual properties
+}
+
+// Customers, files and reviews are virtual properties
+// so they should not be entered by the user
+interface IUser extends Document, UserAttrs {
+	personalTrainerData?: {
+		customers: IUser[]
+		reviews: Schema.Types.ObjectId[]
+		// getRating: () => number
 	}
+	files: Schema.Types.ObjectId[]
+	id: string
 }
 
 // The Schema follows the Principle of Least Cardinality: if there is a one-to-many
@@ -92,9 +110,9 @@ const userSchema = new Schema({
 			enum: TRAINING_GOALS,
 		},
 	},
-	personalTrainerData: {
-		rating: Number,
-	},
+
+	// personalTrainerData: {
+	// },
 })
 
 userSchema.virtual('personalTrainerData.customers', {
@@ -132,10 +150,12 @@ const transformFunction: TransformFunc = (document, returnedObject) => {
  */
 userSchema.set('toJSON', {
 	transform: transformFunction,
+	getters: true,
 })
 
 userSchema.set('toObject', {
 	transform: transformFunction,
+	getters: true,
 })
 
 const User = (models.User as Model<IUser>) || model<IUser>('User', userSchema)
