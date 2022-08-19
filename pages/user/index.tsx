@@ -1,4 +1,4 @@
-import StyldButton from '@/components/Buttons'
+import StyledButton from '@/components/Buttons'
 import { Box, Chip, Divider, Typography } from '@mui/material'
 import Link from 'next/link'
 import React from 'react'
@@ -6,7 +6,7 @@ import AvatarContainer from '../../components/AvatarContainer'
 import NameBadgeCol from '../../components/NameBadgeCol'
 import PageSection from '../../components/PageSection'
 import PageTitleDiv from '../../components/PageTitleDiv'
-import StatBox from '../../components/StatBox'
+// import StatBox from '../../components/StatBox'
 import { ChipBox, PageContainer } from './user.styled'
 
 interface UserViewProps {
@@ -38,11 +38,7 @@ const UserView = ({ ...props }: UserViewProps) => {
 				handleName={`@${props.userName}`}
 			/>
 		</AvatarContainer>
-		<StatBox>
-			<StatItem top="Training" center={props.trainingStatus} bottom="Status" />
-			<StatItem top="weight" center={props.wt} bottom={props.wtUnit} />
-			<StatItem top="BMI" center={props.bmi} bottom={props.bmiCategory} />
-		</StatBox>
+
 		<Divider sx={{ margin: '2em 0' }} />
 		<PageSection sectionTitle="About">
 			<Typography sx={{ textAlign: 'center' }}>{props.bio}</Typography>

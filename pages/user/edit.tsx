@@ -1,10 +1,7 @@
-/* eslint-disable no-console */
-/* eslint-disable spaced-comment */
-import React from 'react'
 import { Grid, MenuItem } from '@mui/material'
 import { Form, Formik } from 'formik'
 import * as yup from 'yup'
-import StyldButton from '@/components/Buttons'
+import StyledButton from '@/components/Buttons'
 import { PageContainer, SelectTextField, AvaEditBtn } from './user.styled'
 import Input from '../../components/Input'
 import SelectDropdown from '../../components/SelectDropDown'
@@ -16,7 +13,7 @@ import {
 	editFormInitValues,
 } from '../../utils/constants'
 import AvatarContainer from '../../components/AvatarContainer'
-import { editProfileValidationSchema } from '../../utils/helper'
+import validationSchema from '../../utils/helper'
 
 const Edit = () => {
 	const {
@@ -31,7 +28,7 @@ const Edit = () => {
 		wtUnit,
 		ht,
 		htUnit,
-	} = editProfileValidationSchema
+	} = validationSchema
 	const handleSubmit = (values: typeof editFormInitValues) => {
 		//submit to api
 		console.log(values)
@@ -48,7 +45,7 @@ const Edit = () => {
 				validationSchema={yup.object({
 					firstName: dynamic('First Name'),
 					lastName: dynamic('Last Name'),
-					username: dynamic('Username'),
+					username: dynamic('User Name'),
 					email,
 					password,
 					confirmPassword,
@@ -63,17 +60,10 @@ const Edit = () => {
 				onSubmit={handleSubmit}
 			>
 				<Form>
-					<Grid container spacing={2}>
-						<Input
-							name="firstName"
-							label="First Name"
-							half={false}
-							type="text"
-						/>
-						<Input name="lastName" label="Last Name" half={false} type="text" />
-						<Input name="username" label="Username" half={false} type="text" />
-						<Input name="email" label="Email" half={false} type="text" />
-					</Grid>
+					<Input name="firstName" label="First Name" half={false} type="text" />
+					<Input name="lastName" label="Last Name" half={false} type="text" />
+					<Input name="username" label="Username" half={false} type="text" />
+					<Input name="email" label="Email" half={false} type="text" />
 					<Grid columnSpacing={1} container>
 						<Grid item xs={12} md={6} sx={{ display: 'flex' }}>
 							<SelectTextField
@@ -82,7 +72,7 @@ const Edit = () => {
 								half
 								type="number"
 							/>
-							<SelectDropdown name="wtUnit" label="weight unit">
+							<SelectDropdown name="wtUnit" label="Weight Unit">
 								{wtUnits.map((unit) => (
 									<MenuItem value={unit} key={`editWtUnit_${unit}`}>
 										{unit}
@@ -97,7 +87,7 @@ const Edit = () => {
 								half
 								type="number"
 							/>
-							<SelectDropdown name="htUnit" label="height unit">
+							<SelectDropdown name="htUnit" label="Height Unit">
 								{htUnits.map((unit) => (
 									<MenuItem value={unit} key={`editHtUnit_${unit}`}>
 										{unit}
@@ -120,7 +110,7 @@ const Edit = () => {
 					/>
 					<Input
 						name="bio"
-						label="bio"
+						label="Bio"
 						multiline
 						half={false}
 						rows={4}
@@ -129,9 +119,9 @@ const Edit = () => {
 					/>
 					<Input
 						name="trainCategories"
-						label="looking for..."
-						multiline
+						label="Looking for..."
 						half={false}
+						multiline
 						rows={4}
 						fullWidth
 						type="text"
@@ -139,7 +129,7 @@ const Edit = () => {
 					<SelectDropdown
 						name="trainingStatus"
 						label="Training Status"
-						sx={{ width: '100%' }}
+						sx={{ width: '100%', marginBottom: '2em' }}
 					>
 						{usrStatus.map((status) => (
 							<MenuItem key={`editUsrStat_${status}`} value={status}>
@@ -147,13 +137,14 @@ const Edit = () => {
 							</MenuItem>
 						))}
 					</SelectDropdown>
-					<StyldButton
+					<StyledButton
+						btnType="default"
 						type="submit"
 						variant="contained"
 						sx={{ marginBottom: '2em' }}
 					>
 						Save
-					</StyldButton>
+					</StyledButton>
 				</Form>
 			</Formik>
 		</PageContainer>

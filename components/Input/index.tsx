@@ -18,7 +18,10 @@ export interface InputProps {
 	name: string
 	label: string
 	half: boolean
-	type: 'text' | 'password'
+	type: 'text' | 'password' | 'number'
+	multiline?: boolean
+	rows?: number
+	fullWidth?: boolean
 }
 
 const Input: React.FC<InputProps> = ({ ...props }) => {
@@ -44,15 +47,17 @@ const Input: React.FC<InputProps> = ({ ...props }) => {
 		</IconButton>
 	)
 
-	const TextIcon = (isSuccess || isError) && props.type !== 'password' && (
-		<IconButton aria-label="verify check" edge="end">
-			{isError ? (
-				<ClearIcon sx={{ color: theme.custom.offlineRed }} />
-			) : (
-				<CheckIcon sx={{ color: theme.custom.green }} />
-			)}
-		</IconButton>
-	)
+	const TextIcon = (isSuccess || isError) &&
+		props.type !== 'password' &&
+		props.type !== 'number' && (
+			<IconButton aria-label="verify check" edge="end">
+				{isError ? (
+					<ClearIcon sx={{ color: theme.custom.offlineRed }} />
+				) : (
+					<CheckIcon sx={{ color: theme.custom.green }} />
+				)}
+			</IconButton>
+		)
 
 	const inputType =
 		// eslint-disable-next-line no-nested-ternary
