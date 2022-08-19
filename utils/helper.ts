@@ -20,4 +20,5 @@ const validationSchema = {
 		.string()
 		.oneOf([yup.ref('password'), null], 'Passwords do not match'),
 }
+
 export default validationSchema
