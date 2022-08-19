@@ -4,12 +4,8 @@ import React from 'react'
 import { Grid, MenuItem } from '@mui/material'
 import { Form, Formik } from 'formik'
 import * as yup from 'yup'
-import {
-	PageContainer,
-	SelectTextField,
-	FormButton,
-	AvaEditBtn,
-} from './user.styled'
+import StyldButton from '@/components/Buttons'
+import { PageContainer, SelectTextField, AvaEditBtn } from './user.styled'
 import Input from '../../components/Input'
 import SelectDropdown from '../../components/SelectDropDown'
 import PageTitleDiv from '../../components/PageTitleDiv'
@@ -24,9 +20,7 @@ import { editProfileValidationSchema } from '../../utils/helper'
 
 const Edit = () => {
 	const {
-		firstName,
-		lastName,
-		username,
+		dynamic,
 		email,
 		password,
 		confirmPassword,
@@ -146,9 +140,13 @@ const Edit = () => {
 							</MenuItem>
 						))}
 					</SelectDropdown>
-					<FormButton variant="contained" type="submit">
+					<StyldButton
+						type="submit"
+						variant="contained"
+						sx={{ marginBottom: '2em' }}
+					>
 						Save
-					</FormButton>
+					</StyldButton>
 				</Form>
 			</Formik>
 		</PageContainer>

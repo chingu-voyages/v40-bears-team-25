@@ -8,9 +8,14 @@ import Input from '@/components/Input'
 import StyldButton from '../Buttons'
 
 const SignUp: React.FC = () => {
-	const initialState = { email: '', password: '' }
-	const { firstName, lastName, username, password, email, confirmPassword } =
-		validationSchema
+	const initialState = {
+		email: '',
+		password: '',
+		firstName: '',
+		lastName: '',
+		username: '',
+	}
+	const { password, email, confirmPassword, dynamic } = validationSchema
 
 	const handleSubmit = async (values: typeof initialState) => {
 		console.log(values)
@@ -21,9 +26,9 @@ const SignUp: React.FC = () => {
 			<Formik
 				initialValues={initialState}
 				validationSchema={yup.object({
-					firstName,
-					lastName,
-					username,
+					firstName: dynamic('First Name'),
+					lastName: dynamic('Last Name'),
+					username: dynamic('Username'),
 					confirmPassword,
 					email,
 					password,

@@ -1,39 +1,28 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { ButtonProps } from '@mui/material'
 import React, { FC } from 'react'
-import CustomButton from './Button.styled'
+import CustomButton, { EditButton, SignOutButton } from './Button.styled'
 
 interface StyledBtnProps extends ButtonProps {
-	edit?: boolean
-	submit?: boolean
+	btnType?: 'edit' | 'signout' | 'default'
+	children: React.ReactNode
 }
 
-const StyldButton: FC<StyledBtnProps> = ({ ...props }) => {
-	// eslint-disable-next-line no-lone-blocks
-	{
-		/* 
-	const theme = useTheme()
-	const bkgrdColor = props.edit
-		? 'gray'
-		: props.submit
-		? theme.custom.pink
-		: theme.custom.blue
-
-	const hoverLogic = props.edit
-		? 'black'
-		: props.submit
-		? 'red'
-: theme.palette.primary.dark */
+const StyledButton: FC<StyledBtnProps> = ({ btnType, children, ...props }) => {
+	switch (btnType) {
+		case 'edit':
+			return <EditButton {...props}>{children}</EditButton>
+		case 'signout':
+			return <SignOutButton {...props}>{children}</SignOutButton>
+		case 'default':
+			return <CustomButton {...props}>{children}</CustomButton>
+		default:
+			return <CustomButton {...props}>{children}</CustomButton>
 	}
-
-	return (
-		// eslint-disable-next-line react/jsx-props-no-spreading
-		<CustomButton {...props}>{props.children}</CustomButton>
-	)
 }
 
-StyldButton.defaultProps = {
-	edit: false,
-	submit: false,
+StyledButton.defaultProps = {
+	btnType: 'default',
 }
 
-export default StyldButton
+export default StyledButton

@@ -1,3 +1,4 @@
+import StyldButton from '@/components/Buttons'
 import { Box, Chip, Divider, Typography } from '@mui/material'
 import Link from 'next/link'
 import React from 'react'
@@ -62,11 +63,15 @@ const UserView = ({ ...props }: UserViewProps) => {
 			}}
 		>
 			<Link passHref href="/" onClick={handleSignOutClick}>
-				<StyldButton sx={{ width: '45%' }}>Sign Out</StyldButton>
+				<StyledButton sx={{ width: '45%' }} btnType="signout">
+					Sign Out
+				</StyledButton>
 			</Link>
 			{/* NEED USERID => DYNAMIC ROUTING */}
 			<Link passHref href="/user/edit" onClick={handleSignOutClick}>
-				<StyldButton sx={{ width: '45%' }}>Edit</StyldButton>
+				<StyledButton sx={{ width: '45%' }} btnType="edit" type="submit">
+					Edit
+				</StyledButton>
 			</Link>
 		</Box>
 	</PageContainer>

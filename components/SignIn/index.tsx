@@ -4,7 +4,7 @@ import { Formik, Form } from 'formik'
 import * as yup from 'yup'
 import validationSchema from '@/utils/helper'
 import Input from '@/components/Input'
-import StyldButton from '../Buttons'
+import StyledButton from '../Buttons'
 
 const SignIn: React.FC = () => {
 	const initialState = { email: '', password: '' }
@@ -35,15 +35,16 @@ const SignIn: React.FC = () => {
 						/>
 
 						<Grid item xs={12}>
-							<StyldButton
+							<StyledButton
+								btnType="default"
 								color="primary"
 								variant="contained"
 								fullWidth
 								type="submit"
-								style={{ marginTop: '10px' }}
+								// sx={{ marginTop: '10px' }}
 							>
 								Sign In
-							</StyldButton>
+							</StyledButton>
 						</Grid>
 					</Grid>
 				</Form>
