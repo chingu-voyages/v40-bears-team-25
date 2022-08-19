@@ -75,6 +75,7 @@ const Input: React.FC<InputProps> = ({ ...props }) => {
 					// eslint-disable-next-line react/jsx-props-no-spreading
 					{...props}
 					id="outlined-adornment-password"
+					sx={{ borderRadius: '15px' }}
 					name={props.name}
 					type={inputType}
 					onBlur={field.onBlur}
