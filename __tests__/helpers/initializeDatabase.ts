@@ -30,13 +30,15 @@ const initializeDatabase = async () => {
 	let personalTrainer = new User(mockUsers.personalTrainer)
 	let customer = new User(mockUsers.customer)
 	let file = new File(mockFile)
-	let review = new Review(mockReview)
 
 	personalTrainer = await personalTrainer.save()
 	customer = await customer.save()
+	let review = new Review({
+		...mockReview,
+		reviewer: customer._id,
+		reviewee: personalTrainer._id,
+	})
 
-	review.reviewer = customer._id as Schema.Types.ObjectId
-	review.reviewee = personalTrainer._id as Schema.Types.ObjectId
 	file.users.push(
 		personalTrainer._id as Schema.Types.ObjectId,
 		customer._id as Schema.Types.ObjectId
@@ -44,8 +46,6 @@ const initializeDatabase = async () => {
 
 	file = await file.save()
 	review = await review.save()
-
-	console.log({ customerid: customer.id, ptid: personalTrainer.id })
 
 	// Personal trainer gets assigned to customer
 	customer.customerData.personalTrainer =
