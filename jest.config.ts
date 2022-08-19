@@ -16,4 +16,4 @@ const customJestConfig: Config = {
 	testEnvironment: 'node', // NOTE: this has to be 'node' instead of jsdom for mongoose to work.
 }
 
-export default customJestConfig
+export default createJestConfig(customJestConfig)
