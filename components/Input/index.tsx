@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { useField } from 'formik'
-
 import {
 	Grid,
 	IconButton,
@@ -18,8 +17,11 @@ import { useTheme } from '@mui/material/styles'
 export interface InputProps {
 	name: string
 	label: string
-	type: 'text' | 'password'
 	half: boolean
+	type: 'text' | 'password' | 'number'
+	multiline?: boolean
+	rows?: number
+	fullWidth?: boolean
 }
 
 const Input: React.FC<InputProps> = ({ ...props }) => {
@@ -45,15 +47,17 @@ const Input: React.FC<InputProps> = ({ ...props }) => {
 		</IconButton>
 	)
 
-	const TextIcon = (isSuccess || isError) && props.type !== 'password' && (
-		<IconButton aria-label="verify check" edge="end">
-			{isError ? (
-				<ClearIcon sx={{ color: theme.custom.offlineRed }} />
-			) : (
-				<CheckIcon sx={{ color: theme.custom.green }} />
-			)}
-		</IconButton>
-	)
+	const TextIcon = (isSuccess || isError) &&
+		props.type !== 'password' &&
+		props.type !== 'number' && (
+			<IconButton aria-label="verify check" edge="end">
+				{isError ? (
+					<ClearIcon sx={{ color: theme.custom.offlineRed }} />
+				) : (
+					<CheckIcon sx={{ color: theme.custom.green }} />
+				)}
+			</IconButton>
+		)
 
 	const inputType =
 		// eslint-disable-next-line no-nested-ternary
@@ -70,6 +74,8 @@ const Input: React.FC<InputProps> = ({ ...props }) => {
 					{props.label}
 				</InputLabel>
 				<OutlinedInput
+					// eslint-disable-next-line react/jsx-props-no-spreading
+					{...props}
 					id="outlined-adornment-password"
 					name={props.name}
 					type={inputType}
@@ -87,6 +93,12 @@ const Input: React.FC<InputProps> = ({ ...props }) => {
 			</FormControl>
 		</Grid>
 	)
+}
+
+Input.defaultProps = {
+	multiline: false,
+	rows: 0,
+	fullWidth: false,
 }
 
 export default Input

@@ -1,15 +1,21 @@
-import { Button, Box, Grid } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 import React from 'react'
 import { Formik, Form } from 'formik'
 import * as yup from 'yup'
-import validationSchema from '@/utils/helper'
+import validationSchema  from '@/utils/helper'
 
 import Input from '@/components/Input'
+import StyldButton from '../Buttons'
 
 const SignUp: React.FC = () => {
-	const initialState = { email: '', password: '' }
-	const { firstname, lastname, username, password, email, confirmPassword } =
-		validationSchema
+	const initialState = {
+		email: '',
+		password: '',
+		firstName: '',
+		lastName: '',
+		username: '',
+	}
+	const { password, email, confirmPassword, dynamic } = validationSchema
 
 	const handleSubmit = async (values: typeof initialState) => {
 		console.log(values)
@@ -20,9 +26,9 @@ const SignUp: React.FC = () => {
 			<Formik
 				initialValues={initialState}
 				validationSchema={yup.object({
-					firstname,
-					lastname,
-					username,
+					firstName: dynamic('First Name'),
+					lastName: dynamic('Last Name'),
+					username: dynamic('Username'),
 					confirmPassword,
 					email,
 					password,
@@ -32,12 +38,12 @@ const SignUp: React.FC = () => {
 				<Form>
 					<Grid container spacing={2}>
 						<Input
-							name="firstname"
+							name="firstName"
 							label="First Name"
 							type="text"
 							half={false}
 						/>
-						<Input name="lastname" label="Last Name" type="text" half={false} />
+						<Input name="lastName" label="Last Name" type="text" half={false} />
 
 						<Input name="username" label="Username" type="text" half />
 
@@ -51,7 +57,7 @@ const SignUp: React.FC = () => {
 						/>
 
 						<Grid item xs={12}>
-							<Button
+							<StyldButton
 								color="primary"
 								variant="contained"
 								fullWidth
@@ -59,7 +65,7 @@ const SignUp: React.FC = () => {
 								style={{ marginTop: '10px' }}
 							>
 								Sign Up
-							</Button>
+							</StyldButton>
 						</Grid>
 					</Grid>
 				</Form>
