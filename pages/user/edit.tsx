@@ -46,9 +46,9 @@ const Edit = () => {
 			<Formik
 				initialValues={editFormInitValues}
 				validationSchema={yup.object({
-					firstName,
-					lastName,
-					username,
+					firstName: dynamic('First Name'),
+					lastName: dynamic('Last Name'),
+					username: dynamic('Username'),
 					email,
 					password,
 					confirmPassword,
@@ -63,10 +63,17 @@ const Edit = () => {
 				onSubmit={handleSubmit}
 			>
 				<Form>
-					<Input name="firstName" label="First Name" half={false} type="text" />
-					<Input name="lastName" label="Last Name" half={false} type="text" />
-					<Input name="username" label="Username" half={false} type="text" />
-					<Input name="email" label="Email" half={false} type="text" />
+					<Grid container spacing={2}>
+						<Input
+							name="firstName"
+							label="First Name"
+							half={false}
+							type="text"
+						/>
+						<Input name="lastName" label="Last Name" half={false} type="text" />
+						<Input name="username" label="Username" half={false} type="text" />
+						<Input name="email" label="Email" half={false} type="text" />
+					</Grid>
 					<Grid columnSpacing={1} container>
 						<Grid item xs={12} md={6} sx={{ display: 'flex' }}>
 							<SelectTextField

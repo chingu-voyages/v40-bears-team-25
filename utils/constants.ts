@@ -18,7 +18,6 @@ export const editFormInitValues = {
 	ht: '',
 	htUnit: '',
 	password: '',
-	confirmPassword: '',
 	bio: '',
 	trainCategories: '',
 	trainingStatus: '',
