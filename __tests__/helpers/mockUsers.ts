@@ -9,13 +9,14 @@ export default {
 		firstName: 'Mike',
 		lastName: 'Ross',
 		email: 'mike.ross@pearsonspecter.com',
-		password: 'passwordTest',
+		passwordHash:
+			'$2b$10$ASsqX9lDF5WjD8FRokPT2ufqUX16.pQR.XMrSZsvHhIUXLfN7mXfe', // testpassword
 		profile: {
 			bio: 'I am a fitness enthusiast!',
 			username: 'mikeross',
 		},
 		customerData: {
-			trainingGoal: 'Mass',
+			trainingGoal: 'mass',
 			measurements: {
 				weight: 70,
 				height: 175,
@@ -27,7 +28,9 @@ export default {
 		firstName: 'Harvey',
 		lastName: 'Specter',
 		email: 'harvey.specter@pearsonspecter.com',
-		password: 'passwordTest',
+		passwordHash:
+			'$2b$10$ASsqX9lDF5WjD8FRokPT2ufqUX16.pQR.XMrSZsvHhIUXLfN7mXfe', // testpassword
+		userType: 'personalTrainer',
 		profile: {
 			bio: 'I am a fitness enthusiast as well!',
 			username: 'harveyspecter',
