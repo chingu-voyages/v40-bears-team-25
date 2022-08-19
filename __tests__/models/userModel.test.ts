@@ -2,6 +2,10 @@
 import { Error } from 'mongoose'
 import { database } from '../../lib'
 import User from '../../models/userModel'
+import initializeDatabase from '../helpers/initializeDatabase'
+import mockUsers from '../helpers/mockUsers'
+import getUser from '../../utils/mongoose/getUser'
+import { Review } from '../../models'
 
 const mockUser = {
 	firstName: 'Mike',
@@ -78,8 +82,57 @@ describe('User Model', () => {
 	})
 
 	describe('virtuals', () => {
-		test('personalTrainerData.customers should return the list of customer ids', () => {
-			expect(true).toBeTruthy()
+		beforeAll(async () => {
+			await initializeDatabase()
+		})
+
+		test('personalTrainerData.customers should return the list of customers', async () => {
+			// using getUser to get populated user from db
+			const personalTrainer = await getUser({
+				email: mockUsers.personalTrainer.email,
+			})
+			const user = await getUser({ email: mockUsers.customer.email })
+
+			const customers = personalTrainer.personalTrainerData?.customers
+
+			if (!customers) {
+				throw new Error('no customers found in the pt object')
+			}
+			expect(customers.length).toBe(1)
+
+			const hasUserAsCustomer = customers.find(
+				(customer) => customer.id === user.id
+			)
+
+			expect(hasUserAsCustomer).toBeTruthy()
+		})
+
+		// TODO Fix
+		test('personalTrainerData.reviews should return the list of reviews', async () => {
+			const personalTrainer = await getUser({
+				email: mockUsers.personalTrainer.email,
+			})
+			const user = await getUser({ email: mockUsers.customer.email })
+
+			const allReviews = await Review.find({}, {})
+
+			console.log('personal trainer fetched', { personalTrainer, allReviews })
+
+			const reviews = personalTrainer.personalTrainerData?.reviews
+		})
+
+		test('files should return the list of shared files', async () => {
+			const personalTrainer = await getUser({
+				email: mockUsers.personalTrainer.email,
+			})
+			const user = await getUser({ email: mockUsers.customer.email })
+
+			const userFiles = user.files
+			const ptFiles = personalTrainer.files
+			// TODO: get file from db and check that id corresponds
+
+			expect(userFiles.length).toBe(1)
+			expect(ptFiles.length).toBe(1)
 		})
 	})
 
