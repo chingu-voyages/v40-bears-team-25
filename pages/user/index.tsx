@@ -1,5 +1,7 @@
+/* eslint-disable spaced-comment */
 import StyledButton from '@/components/Buttons'
-import { useAppSelector } from '@/redux/app/hooks'
+import { useAppDispatch, useAppSelector } from '@/redux/app/hooks'
+import { clearUsrSession } from '@/redux/features/auth'
 import { fetcher } from '@/utils/helper'
 import { Box, Chip, Divider, LinearProgress, Typography } from '@mui/material'
 import Link from 'next/link'
@@ -12,26 +14,12 @@ import PageTitleDiv from '../../components/PageTitleDiv'
 // import StatBox from '../../components/StatBox'
 import { ChipBox, PageContainer } from './user.styled'
 
-/* 
-interface UserViewProps {
-	name: string
-	lastName: string
-	userName: string
-	avatarContent: string
-	bio: string
-	trainingStatus: string
-	trainingCategories: string[]
-	wt: number
-	wtUnit: string
-	bmi: number
-	bmiCategory: string
-}
-*/
-
 const UserView = () => {
-	// eslint-disable-next-line spaced-comment
-	//BE: What's the endpoint to view a user?
-	const userId = useAppSelector((state) => state.auth.user.userId)
+	const dispatch = useAppDispatch()
+
+	//BE: What's the endpoint when a user wants to view it's profile?
+	//when user logins in or register => userId should be available in redux
+	const userId = useAppSelector((state) => state.auth.user?.userId)
 	const { data, error } = useSWR(`/api/user/${userId}`, fetcher)
 
 	if (error) return <div>Authorisation Failed: Please sign again.</div>
@@ -43,7 +31,7 @@ const UserView = () => {
 		)
 
 	const handleSignOutClick = () => {
-		// eslint-disable-next-line spaced-comment
+		dispatch(clearUsrSession())
 		//clears potiential cookies, tokens, and userInformation in browser
 	}
 
@@ -83,11 +71,7 @@ const UserView = () => {
 					</StyledButton>
 				</Link>
 				{/* NEED USERID => DYNAMIC ROUTING */}
-				<Link
-					passHref
-					href={`/user/edit/${data.userId}`}
-					onClick={handleSignOutClick}
-				>
+				<Link passHref href={`/user/edit/${data.userId}`}>
 					<StyledButton sx={{ width: '45%' }} btnType="edit" type="submit">
 						Edit
 					</StyledButton>

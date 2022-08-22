@@ -1,9 +1,11 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
+import auth from '@/redux/features/auth'
 import testerSlice from '../features/test'
 
 export const store = configureStore({
 	reducer: {
 		test: testerSlice,
+		auth,
 	},
 })
 
