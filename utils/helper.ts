@@ -2,7 +2,16 @@ import * as yup from 'yup'
 
 import { passwordRegex } from './constants'
 
-const validationSchema = {
+export const fetcher = async (url: string) => {
+	const res = await fetch(url)
+	if (!res.ok) {
+		throw Error('fetcher unsuccessful')
+	}
+	const data = await res.json()
+	return data
+}
+
+export const validationSchema = {
 	password: yup
 		.string()
 		.required('Password is required')
@@ -33,5 +42,3 @@ const validationSchema = {
 	bio: yup.string(),
 	trainingCategories: yup.string(),
 }
-
-export default validationSchema
