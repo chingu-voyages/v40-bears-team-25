@@ -1,5 +1,6 @@
 /* eslint-disable spaced-comment */
 import StyledButton from '@/components/Buttons'
+import StatItem from '@/components/StatBox/StatItem'
 import { useAppDispatch, useAppSelector } from '@/redux/app/hooks'
 import { clearUsrSession } from '@/redux/features/auth'
 import { fetcher } from '@/utils/helper'
@@ -11,7 +12,7 @@ import AvatarContainer from '../../components/AvatarContainer'
 import NameBadgeCol from '../../components/NameBadgeCol'
 import PageSection from '../../components/PageSection'
 import PageTitleDiv from '../../components/PageTitleDiv'
-// import StatBox from '../../components/StatBox'
+import StatBox from '../../components/StatBox'
 import { ChipBox, PageContainer } from './user.styled'
 
 const UserView = () => {
@@ -45,7 +46,11 @@ const UserView = () => {
 					handleName={`@${data.userName}`}
 				/>
 			</AvatarContainer>
-
+			<StatBox>
+				<StatItem top="Training" center={data.trainingStatus} bottom="Status" />
+				<StatItem top="weight" center={data.wt} bottom={data.wtUnit} />
+				<StatItem top="BMI" center={data.bmi} bottom={data.bmiCategory} />
+			</StatBox>
 			<Divider sx={{ margin: '2em 0' }} />
 			<PageSection sectionTitle="About">
 				<Typography sx={{ textAlign: 'center' }}>{data.bio}</Typography>
