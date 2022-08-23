@@ -3,20 +3,39 @@ import { Grid, MenuItem } from '@mui/material'
 import { Form, Formik } from 'formik'
 import * as yup from 'yup'
 import StyledButton from '@/components/Buttons'
+import { useAppDispatch, useAppSelector } from '@/redux/app/hooks'
+import useSWR, { mutate } from 'swr'
+import { fetchUser } from '@/redux/features/auth'
+import Router from 'next/router'
 import { PageContainer, SelectTextField, AvaEditBtn } from './user.styled'
 import Input from '../../components/Input'
 import SelectDropdown from '../../components/SelectDropDown'
 import PageTitleDiv from '../../components/PageTitleDiv'
-import {
-	wtUnits,
-	htUnits,
-	usrStatus,
-	editFormInitValues,
-} from '../../utils/constants'
+import { wtUnits, htUnits, usrStatus } from '../../utils/constants'
 import AvatarContainer from '../../components/AvatarContainer'
-import validationSchema from '../../utils/helper'
+import { fetcher, validationSchema } from '../../utils/helper'
 
 const Edit = () => {
+	const dispatch = useAppDispatch()
+	const user = useAppSelector((state) => state.auth.user)
+	const url = `/api/user/${user?.userId}`
+	const { data } = useSWR(url, fetcher)
+
+	const editFormInitValues = {
+		firstName: user?.firstName || '',
+		lastName: user?.lastName || '',
+		userName: user?.userName || '',
+		email: user?.email || '',
+		wt: user?.wt || '',
+		wtUnit: user?.wtUnit || '',
+		ht: user?.ht || '',
+		htUnit: user?.htUnit || '',
+		password: user?.password || '',
+		bio: user?.bio || '',
+		trainCategories: user?.trainingCategories || '',
+		trainingStatus: user?.trainingStatus || '',
+	}
+
 	const {
 		dynamic,
 		email,
@@ -30,9 +49,20 @@ const Edit = () => {
 		ht,
 		htUnit,
 	} = validationSchema
-	const handleSubmit = (values: typeof editFormInitValues) => {
-		//submit to api
-		console.log(values)
+
+	const handleSubmit = async (values: typeof editFormInitValues) => {
+		const patchUser = (obj: typeof editFormInitValues) =>
+			fetch(url, {
+				method: 'PATCH',
+				body: JSON.stringify(obj),
+			})
+		const userData = { ...data, ...values }
+		const options = { optimisticData: user, rollbackOnError: true }
+
+		mutate(url, patchUser(userData), options).then((response) => {
+			dispatch(fetchUser(response))
+			Router.push('/')
+		})
 	}
 
 	return (
@@ -46,7 +76,7 @@ const Edit = () => {
 				validationSchema={yup.object({
 					firstName: dynamic('First Name'),
 					lastName: dynamic('Last Name'),
-					username: dynamic('User Name'),
+					userName: dynamic('User Name'),
 					email,
 					password,
 					confirmPassword,
@@ -63,7 +93,7 @@ const Edit = () => {
 				<Form>
 					<Input name="firstName" label="First Name" half={false} type="text" />
 					<Input name="lastName" label="Last Name" half={false} type="text" />
-					<Input name="username" label="Username" half={false} type="text" />
+					<Input name="userName" label="Username" half={false} type="text" />
 					<Input name="email" label="Email" half={false} type="text" />
 					<Grid columnSpacing={1} container>
 						<Grid item xs={12} md={6} sx={{ display: 'flex' }}>

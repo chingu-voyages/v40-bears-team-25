@@ -3,14 +3,20 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 export interface UserView {
 	userId: string
 	name: string
+	firstName: string
 	lastName: string
 	userName: string
+	email: string
 	avatarContent: string
 	bio?: string
 	trainingStatus?: string
 	trainingCategories?: string[]
 	wt?: number
 	wtUnit?: string
+	ht?: number
+	htUnit?: string
+	password: string
+	confirmPassword?: string
 	bmi?: number
 	bmiCategory?: string
 }
