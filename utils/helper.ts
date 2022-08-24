@@ -18,6 +18,7 @@ export const validationSchema = {
 		.min(8, 'Password must be 8 characters or more')
 		.matches(passwordRegex, 'Password must contain a special character'),
 	dynamic: (title: string) => yup.string().required(`${title} is required`),
+	userType: yup.string().required(),
 	email: yup
 		.string()
 		.email('Invalid email format')

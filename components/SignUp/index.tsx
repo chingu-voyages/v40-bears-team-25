@@ -1,11 +1,12 @@
-import { Box, Grid } from '@mui/material'
+import { Box, FormControl, FormLabel, Grid, RadioGroup } from '@mui/material'
 import React from 'react'
 import { Formik, Form } from 'formik'
 import * as yup from 'yup'
-import validationSchema  from '@/utils/helper'
+import { validationSchema } from '@/utils/helper'
 
 import Input from '@/components/Input'
 import StyldButton from '../Buttons'
+import RadioButtonGroup from '../RadioBtnGroup'
 
 const SignUp: React.FC = () => {
 	const initialState = {
@@ -14,8 +15,10 @@ const SignUp: React.FC = () => {
 		firstName: '',
 		lastName: '',
 		username: '',
+		userType: '',
 	}
-	const { password, email, confirmPassword, dynamic } = validationSchema
+	const { password, email, confirmPassword, dynamic, userType } =
+		validationSchema
 
 	const handleSubmit = async (values: typeof initialState) => {
 		console.log(values)
@@ -32,10 +35,22 @@ const SignUp: React.FC = () => {
 					confirmPassword,
 					email,
 					password,
+					userType,
 				})}
 				onSubmit={handleSubmit}
 			>
 				<Form>
+					<FormControl component="fieldset" required>
+						<FormLabel>I am a ...</FormLabel>
+						<RadioGroup aria-label="userType" name="userType" row>
+							<RadioButtonGroup name="userType" value="client" label="Client" />
+							<RadioButtonGroup
+								name="userType"
+								value="trainer"
+								label="Trainer"
+							/>
+						</RadioGroup>
+					</FormControl>
 					<Grid container spacing={2}>
 						<Input
 							name="firstName"
